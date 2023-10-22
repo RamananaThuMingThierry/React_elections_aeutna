@@ -1,26 +1,90 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
 
 const Membres_electeurs = () =>{
     
     const [loading, setLoading] = useState(true);
+    
+    const [searchInput, setSearch] = useState({
+        search:'',
+        select:''
+    });
+
+    const handleInput = (e) =>{
+        e.persist();
+        setSearch({...searchInput, [e.target.name]: e.target.value});
+    }
+
     const [membresElecteursList, setMembresElecteursList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const recordsPerPage = 10;
+    const lastIndex = currentPage * recordsPerPage;
+    const firstIndex = lastIndex - recordsPerPage;
+    const records = membresElecteursList.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(membresElecteursList.length / recordsPerPage);
+    const numbers = [...Array(npage +1).keys()].slice(1);
+    
+    const  handlePageClick = (data) => {
+        setCurrentPage(data.selected + 1);
+    }
 
     useEffect(() =>{
 
         axios.get(`api/membres`).then(res =>{
-            if(res.code_status === 200){
+            if(res.status === 200){
                 setMembresElecteursList(res.data.electeurs_membres);   
             }
              setLoading(false);
          });
-
      },[]);
 
     if(loading){
         return <h4>Loading Listes membres AEUTNA...</h4>
+    }
+
+
+    const Refresh = (e) =>{
+        e.preventDefault();
+        
+        searchInput.search = '';
+        searchInput.select = '';
+
+        axios.get(`api/membres`).then(res =>{
+            if(res.status === 200){
+                setMembresElecteursList(res.data.electeurs_membres);   
+            }
+         });
+    }
+
+    
+    const RechercheSubmit = (e) =>{
+        e.preventDefault();
+
+        const data = {
+            search: searchInput.search,
+            select: searchInput.select
+        }
+
+        if(data.search == ''){
+            swal("Warning", "Veuillez entrer la valuer à recherche !", "warning");
+        }else if(data.select == ''){
+            swal("Warning", "Voulez-vous séléctionner par quoi ?", "warning");
+        }else{
+            axios.get(`api/recherche_membres/${data.select}/${data.search}`).then(res =>{
+                console.log(res.data);
+                if(res.data.status  === 200){
+                    console.log(res.data.recherche_membres);
+                    setMembresElecteursList(res.data.recherche_membres);
+                }else if(res.data.status === 400){
+                    swal("Info", res.data.message,"info");
+                }else if(res.data.status === 404){
+                    swal("Warning", res.data.message,"warning");
+                }
+            });
+        }
     }
 
     const deleteElecteursMembres = (e, id) =>{
@@ -37,10 +101,10 @@ const Membres_electeurs = () =>{
           .then((willDelete) => {
             if (willDelete) {
                 axios.delete(`api/delete-electeur/${id}`).then(res =>{
-                    if(res.data.code_status === 200){
+                    if(res.data.status === 200){
                         swal("Success", res.data.message, "success");
-                        thisClicked.closest("tr").remove();
-                    }else if(res.data.code_status === 404){
+                        Refresh(e); 
+                    }else if(res.data.status === 404){
                         swal("Error", res.data.message, "error");
                         thisClicked.innerHTML = "<i class=\"fas fa-trash\"></i>";
                     }
@@ -49,45 +113,73 @@ const Membres_electeurs = () =>{
               swal("La suppression a été annulé!");
               thisClicked.innerHTML = "<i class=\"fas fa-trash\"></i>";
             }
-          });
-
-       
+          });      
     }
 
     return (
         <div className="container-fluid">
-            <div className="card mt-4">
-                <div className="card-header">
-                    <h4>
-                        Liste des catégories
-                        <Link to="/admin/add-electeur-membre" className="btn btn-success float-end btn-sm"><i className="fas fa-plus"></i></Link>    
-                 </h4>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="card mt-2 p-2 rounded-0">
+                        <div className="d-flex justify-content-between">
+                        <h4>
+                            Liste des membres A.E.U.T.N.A
+                        </h4>
+                        <div>
+                        <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
+                        <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-plus"></i></Link>    
+                        </div>
+                        </div>
+                        </div>
                 </div>
+            </div>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="card mt-1 p-2 rounded-0">
+                       <form onSubmit={RechercheSubmit}>
+                            <div className="input-group">
+                                <input type="search" name="search" className="form-control rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
+                                <select class="form-select" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
+                                    <option value="" selected>Ouvre ce menu de séléction</option>
+                                    <option value="numero_carte">Numéro carte</option>
+                                    <option value="nom">Nom</option>
+                                    <option value="prenom">Prénom</option>
+                                    <option value="cin">C.I.N</option>
+                                </select>
+                                <button type="submit" className="btn btn-outline-primary rounded-0">Recherce</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div className="card mt-1 rounded-0">
                 <div className="card-body">
                     <div className="table-responsive">
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Photos</th>
+                                    <th>Numéro carte</th>
                                     <th>Noms</th>
                                     <th>Prénoms</th>
-                                    <th>Numéro carte</th>
                                     <th className="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    membresElecteursList.map(item => {
+                                    records.map(item => {
                                         return (
                                             <tr key={item.id}>
+                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" alt="Image"/></td>
+                                                <td>{item.numero_carte ?? '-'}</td>
                                                 <td>{item.nom}</td>
                                                 <td>{item.prenom}</td>
-                                                <td>{item.numero_carte}</td>
                                                 <td className="text-center">
-                                                    <Link to={`show-electeur/${item.id}`} className="btn btn-warning btn-sm mr-2"><i className="fas fa-eye"></i></Link>
-                                                    <Link to={`edit-electeur/${item.id}`} className="btn btn-primary btn-sm mr-2"><i className="fa fa-edit"></i></Link>
-                                                    <button className="btn btn-danger btn-sm d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
+                                                    <div className="btn-group btn-group-md">
+                                                    <Link to={`show-electeur/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                    <Link to={`edit-electeur/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
+                                                    <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
+                                                    </div>
                                                 </td>
 
                                             </tr>
@@ -96,11 +188,33 @@ const Membres_electeurs = () =>{
                                 }
                             </tbody>
                         </table>
+                        {
+                            membresElecteursList.length > 10 ? 
+                            <ReactPaginate 
+                            previousLabel={'Precedent'}
+                            nextLabel={'Suivant'}
+                            breakLabel={'...'}
+                            pageCount={numbers.length}
+                            marginPagesDisplayed={3}
+                            pageRangeDisplayed={6}
+                            onPageChange={handlePageClick}
+                            containerClassName={'pagination justify-content-center'}
+                            pageClassName={'page-item'}
+                            pageLinkClassName={'page-link'}
+                            previousClassName={'page-item'}
+                            previousLinkClassName={'page-link'}
+                            nextClassName={'page-item'}
+                            nextLinkClassName={'page-link'}
+                            breakClassName={'page-item'}
+                            breakLinkClassName={'page-link'}
+                            activeClassName={'active'}
+                        />
+                            : ''
+                        }
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-
 export default Membres_electeurs;

@@ -2,13 +2,14 @@ import React from "react";
 
 const Footer = () =>{
     return (
-        <footer className="main-footer">
-            <strong>Copyright &copy; 2023 <a href="https://adminlte.io">Elections</a>.</strong>
-            AEUTNA
-            <div className="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0-pre
+        <footer className="py-4 bg-light mt-auto">
+        <div className="container-fluid">
+            <div className="d-flex align-items-end justify-content-between small">
+                <div className="text-muted align-items-end">Copyright &copy; 2023</div>
+                <div className="text-muted align-items-end">Version 1.0.12</div>
             </div>
-        </footer>
+        </div>
+    </footer>
     );
 }
 
