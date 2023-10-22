@@ -170,14 +170,14 @@ const Membres_electeurs = () =>{
                                     records.map(item => {
                                         return (
                                             <tr key={item.id}>
-                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" alt="Image"/></td>
+                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td>{item.numero_carte ?? '-'}</td>
                                                 <td>{item.nom}</td>
                                                 <td>{item.prenom}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                     <Link to={`show-electeur/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
-                                                    <Link to={`edit-electeur/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
+                                                    <Link to={`edit-membres/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
                                                     <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
                                                     </div>
                                                 </td>

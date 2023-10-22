@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Dashboard from "../../components/back_end/Dashboard";
 import Profile from "../../components/back_end/Profile";
-import Membres_electeurs from "../../components/back_end/electeurs/membres_electeurs";
+import Membres_electeurs from "../../components/back_end/electeurs/membres";
 import AddMembres from "../../components/back_end/electeurs/add_membres";
 import ShowMembres from "../../components/back_end/electeurs/show_membres";
 import Navbar from "./Navbar";
@@ -13,6 +13,7 @@ import ApprouveMembres from "../../components/back_end/electeurs/approuve_membre
 import ErrorPage from '../../components/ErrorPage';
 import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
+import EditMembres from "../../components/back_end/electeurs/edit_membres";
 
 class MasterLayout extends Component{
     render(){
@@ -37,7 +38,7 @@ class MasterLayout extends Component{
                                     <Route exact path="/admin/approuve-membres/:id" component={ApprouveMembres} />
                                     <Route exact path="/admin/add-membres" component={AddMembres} />
                                     <Route exact path="/admin/show-electeur/:id" component={ShowMembres} />
-                                    {/* <Route exact path="/admin/edit-category/:id" component={EditCategory} /> */}
+                                    <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
 
                                     {/* Users */}
                                     {/* <Route exact path="/admin/users" component={Users} /> */}
