@@ -49,34 +49,54 @@ const Login = () =>{
     }
 
     return (
-        <>
-            <div className="container-fluid d-flex justify-content-center align-items-center" style={{
-                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/bg.jpg)`,
-                        backgroundSize: 'cover',
-                        width: '100vw',
-                        height: '100vh',
-                    }}>
-                <div className="row">
-                    <div className="col-md-4 col-sm-6 offset-sm-3 offset-md-4" style={{marginTop: '150px'}}>
-                        <h4 className="text-center">Login</h4>
+        <section className="vh-100" style={{backgroundColor: '#5D6D7E'}}>
+            <div className="container py-5 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+                <div className="col col-xl-10">
+                <div className="card" style={{borderRadius:'1rem'}}>
+                    <div className="row g-0">
+                    <div className="col-md-6 col-lg-5 d-none d-md-block">
+                        <img src={`${process.env.PUBLIC_URL}/images/login.jpg`}
+                        alt="login form" className="img-fluid" style={{borderRadius:'1rem 0 0 1rem', height:'65vh'}}/>
+                    </div>
+                    <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div className="card-body p-4 p-lg-5 text-black">
+
                         <form onSubmit={LoginSubmit}>
-                            <div className="form-group">
-                                <input type="email" placeholder="Adresse E-mail" name="email" onChange={handleInput} className="form-control" value={LoginInput.email} style={inputStyle}/>
-                                <span>{LoginInput.error_list.email}</span>
+                            <div className="d-flex justify-content-center align-items-center mb-3 pb-1">
+                            <i className="fas fa-vote-yea fa-2x me-3" style={{color:'#ff6219'}}></i>
+                            <span className="h1 fw-bold mb-0 roboto-font">Elections 2023&nbsp;</span>
+                            <i className="fas fa-vote-yea fa-2x mr-3" style={{color:'#ff6219'}}></i>
                             </div>
-                            <div className="form-group">
-                                <input type="password" placeholder="Mot de passe" name="password" onChange={handleInput} className="form-control" value={LoginInput.password} style={inputStyle}/>
-                                <span>{LoginInput.error_list.password}</span>
+
+                            <h5 className="fw-normal mb-3 pb-3 text-center text-muted roboto-font" style={{letterSpacing:'1px'}}>Connectez-vous à votre compte</h5>
+
+                            <div className="form-outline mb-4">
+                            <label className="form-label roboto-font" for="email">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" value={LoginInput.email} onChange={handleInput} className="form-control roboto-font rounded-0 form-control-lg" />
+                            <span className="text-danger small roboto-font">{LoginInput.error_list.email}</span>
                             </div>
-                            <Link  to="/register">S'inscrire</Link>
-                            <div className="form-group text-center" style={inputStyle}>
-                                <button type="submit" className="btn btn-primary">Se Connecter</button>
+
+                            <div className="form-outline mb-4">
+                            <label className="form-label roboto-font" for="password">Mot de passe</label>
+                            <input type="password" id="password" name="password" onChange={handleInput} className="form-control rounded-0 roboto-font form-control-lg" />
+                            <span className="text-danger small roboto-font">{LoginInput.error_list.password}</span>
                             </div>
+
+                            <div className="pt-1 mb-4 d-flex justify-content-center">
+                            <button className="btn btn-dark btn-lg btn-block w-50 rounded-0 roboto-font" type="submit">Se connecter</button>
+                            </div>
+                            <p className="mb-5 text-center roboto-font pb-lg-2" style={{color:'#393f81'}}>Vous n'avez pas de compte? <Link type="#" to="/register"
+                                style={{color:'#393f81'}}>S'inscrire</Link></p>
                         </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
+                </div>
             </div>
-        </>
+            </div>
+        </section>
     );
 }
 

@@ -19,6 +19,7 @@ import Non_adhere from "../../components/back_end/electeurs/non_adhere";
 import AddElecteurNonAdhere from "../../components/back_end/electeurs/add_electeur_non_adhere";
 import ShowElecteurNonAdhere from "../../components/back_end/electeurs/show_electeur_non_adhere";
 import EditElecteurNonAdhere from "../../components/back_end/electeurs/edit_electeur_non_adhere";
+import Resultat from "../../components/back_end/statistiques/resultat";
 
 class MasterLayout extends Component{
     render(){
@@ -50,6 +51,7 @@ class MasterLayout extends Component{
                                     <Route exact path="/admin/show-electeur-non-adhere/:id" component={ShowElecteurNonAdhere} />
                                     <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
                                     <Route exact path="/admin/edit-electeur-non-adhere/:id" component={EditElecteurNonAdhere} />
+                                    <Route exact path="/admin/resultat" component={Resultat} />
 
                                     {/* Users */}
                                     {/* <Route exact path="/admin/users" component={Users} /> */}
