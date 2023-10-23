@@ -141,7 +141,11 @@ const EditMembres = (props) =>{
 
     if(loading){
         return (
-            <h1>Update Product ...</h1>
+            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
+                <div className="text-center">
+                    <h2 className="text-muted roboto-font">Veuillez patienter s'il vous plaît...!</h2>        
+                </div>    
+            </div>
         );
     }
 
@@ -150,7 +154,7 @@ const EditMembres = (props) =>{
         <div className="row">
             <div className="col-md-12">
                 <div className="card elevation-1 border-0 rounded-0 mt-2">
-                    <h3 className="text-center font-weight-light my-4">Ajouter un nouveau membres AEUTNA</h3>
+                    <h3 className="text-center text-muted my-3">Ajouter un nouveau membres AEUTNA</h3>
                 </div>
             </div>
         </div>

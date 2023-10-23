@@ -63,7 +63,11 @@ const ApprouveMembres = (props) =>{
 
     if(loading){
         return (
-            <h2>Veuillez patientez ...</h2>
+            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
+                <div className="text-center">
+                    <h2 className="text-muted roboto-font">Veuillez patienter s'il vous plaît...!</h2>        
+                </div>    
+            </div>
         );
     }
 
@@ -72,7 +76,7 @@ const ApprouveMembres = (props) =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card elevation-1 border-0 rounded-0 mt-2">
-                        <h3 className="text-center font-weight-light my-4">Informations</h3>
+                        <h2 className="text-center text-muted my-3 roboto-font">Informations</h2>
                     </div>
                 </div>
             </div>
@@ -81,40 +85,40 @@ const ApprouveMembres = (props) =>{
                     <div className="card elevation-1 border-0 rounded-0 mt-1">
                         <div className="card-body">
                             <div className="row">
-                                    <div className="col-md-4 col-sm-6">
+                                    <div className="col-md-4 col-sm-6 mt-2">
                                         <div className="d-flex justify-content-center">
                                             <img style={{borderRadius: '5px'}} src={showmembres.photo != null ? `http://localhost:8000/${showmembres.photo}` : `${process.env.PUBLIC_URL}/images/photo.jpg`} height="250px" width="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-md-4 mt-2">
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>Numéro Carte</label>
-                                                <input className="form-control p-3 rounded-0" disabled value={showmembres.numero_carte ?? '-'} style={{backgroundColor:'white'}}/>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Numéro Carte</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" disabled value={showmembres.numero_carte ?? '-'} style={{backgroundColor:'white'}}/>
                                             </div>
-                                            <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>Nom</label>
-                                                <input className="form-control p-3 rounded-0" value={showmembres.nom ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                            <div className="col-md-12 mt-2">
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Nom</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.nom ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                             </div>
-                                            <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>Prénom</label>
-                                                <input className="form-control p-3 rounded-0" value={showmembres.prenom} disabled style={{backgroundColor:'white'}}/>
+                                            <div className="col-md-12 mt-2">
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Prénom</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.prenom} disabled style={{backgroundColor:'white'}}/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-md-4 mt-2">
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>Sexe</label>
-                                                <input className="form-control p-3 rounded-0" disabled value={showmembres.sexe ?? 'Masculin'} style={{backgroundColor:'white'}}/>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Sexe</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" disabled value={showmembres.sexe ?? 'Masculin'} style={{backgroundColor:'white'}}/>
                                             </div>
-                                            <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>C.I.N</label>
-                                                <input className="form-control p-3 rounded-0" value={showmembres.cin ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                            <div className="col-md-12 mt-2">
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">C.I.N</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.cin ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                             </div>
-                                            <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}}>Lieu de délivrance</label>
-                                                <input className="form-control p-3 rounded-0" value={showmembres.delivrance_cin ?? '-'} disabled />
+                                            <div className="col-md-12 mt-2">
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Lieu de délivrance</label>
+                                                <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.delivrance_cin ?? '-'} disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -124,8 +128,8 @@ const ApprouveMembres = (props) =>{
                                     {/* Secteurs et vote */}
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <label style={{fontWeight: 'bold', fontSize: '17px'}}>Secteurs</label>
-                                            <select className="form-select rounded-0 p-3" name="secteurs" value={approuveInput.secteurs} onChange={handleInput}>
+                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Secteurs</label>
+                                            <select className="form-select rounded-0 p-3 roboto-font" name="secteurs" value={approuveInput.secteurs} onChange={handleInput}>
                                                 <option value="" selected>Secteurs</option>
                                                 <option value="67 h">67 h</option>
                                                 <option value="ambohipo">Ambohipo</option>
@@ -138,8 +142,8 @@ const ApprouveMembres = (props) =>{
                                             </select>
                                         </div>
                                         <div className="col-md-6">
-                                            <label style={{fontWeight: 'bold', fontSize: '17px'}}>Vote</label>
-                                            <select className="form-select rounded-0 p-3" name="votes" value={approuveInput.votes} onChange={handleInput}>
+                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Vote</label>
+                                            <select className="form-select rounded-0 p-3 roboto-font" name="votes" value={approuveInput.votes} onChange={handleInput}>
                                                 <option value="" selected>Ouvre ce menu de séléction</option>
                                                 <option value="cin">C.I.N</option>
                                                 <option value="numero_carte">Numéro Carte</option>
@@ -152,10 +156,10 @@ const ApprouveMembres = (props) =>{
                                         <div className="col-md-8 offset-md-2">
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                <Link to={`/admin/show-electeur/${showmembres.id}`} className="btn btn-danger p-3 rounded-0 w-100">Annuler</Link>
+                                                <Link to={`/admin/show-electeur/${showmembres.id}`} className="btn btn-danger p-3 rounded-0 roboto-font w-100">Annuler</Link>
                                                 </div>
                                                 <div className="col-md-6">
-                                                <button type="submit" className="btn btn-info p-3 rounded-0 w-100">Valider</button>
+                                                <button type="submit" className="btn btn-info p-3 rounded-0 w-100 roboto-font">Valider</button>
                                                 </div>
                                             </div>
                                         </div>

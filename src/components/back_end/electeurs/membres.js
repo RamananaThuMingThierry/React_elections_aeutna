@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import '@fontsource/roboto';
 import ReactPaginate from 'react-paginate';
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
+import ChargingAnimation from "../chargments/chargementAnimation";
 
 const Membres_electeurs = () =>{
     
@@ -42,7 +44,14 @@ const Membres_electeurs = () =>{
      },[]);
 
     if(loading){
-        return <h4>Loading Listes membres AEUTNA...</h4>
+        return (
+            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
+                <div className="text-center">
+                    <h1 className="roboto-font">Chargment...</h1>
+                    <h2 className="text-muted roboto-font">Listes membres A.E.U.T.N.A</h2>        
+                </div>    
+            </div>
+        );
     }
 
 
@@ -122,12 +131,12 @@ const Membres_electeurs = () =>{
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between">
-                        <h4>
+                        <h2 className="roboto-font text-muted">
                             Liste des membres A.E.U.T.N.A
-                        </h4>
-                        <div>
-                        <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
-                        <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-plus"></i></Link>    
+                        </h2>
+                        <div className="group-bnt mt-1">
+                            <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
+                            <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
                         </div>
                         </div>
                         </div>
@@ -138,15 +147,15 @@ const Membres_electeurs = () =>{
                     <div className="card mt-1 p-2 rounded-0">
                        <form onSubmit={RechercheSubmit}>
                             <div className="input-group">
-                                <input type="search" name="search" className="form-control rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
-                                <select class="form-select" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
+                                <input type="search" name="search" className="roboto-font form-control rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
+                                <select className="form-select roboto-font" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
                                     <option value="" selected>Ouvre ce menu de séléction</option>
                                     <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
                                     <option value="cin">C.I.N</option>
                                 </select>
-                                <button type="submit" className="btn btn-outline-primary rounded-0">Recherce</button>
+                                <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherce</button>
                             </div>
                         </form>
                     </div>
@@ -158,11 +167,11 @@ const Membres_electeurs = () =>{
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Photos</th>
-                                    <th>Numéro carte</th>
-                                    <th>Noms</th>
-                                    <th>Prénoms</th>
-                                    <th className="text-center">Actions</th>
+                                    <th className="roboto-font">Photos</th>
+                                    <th className="roboto-font">Numéro carte</th>
+                                    <th className="roboto-font">Noms</th>
+                                    <th className="roboto-font">Prénoms</th>
+                                    <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -171,9 +180,9 @@ const Membres_electeurs = () =>{
                                         return (
                                             <tr key={item.id}>
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
-                                                <td>{item.numero_carte ?? '-'}</td>
-                                                <td>{item.nom}</td>
-                                                <td>{item.prenom}</td>
+                                                <td className="roboto-font">{item.numero_carte ?? '-'}</td>
+                                                <td className="roboto-font">{item.nom}</td>
+                                                <td className="roboto-font">{item.prenom}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                     <Link to={`show-membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
@@ -189,7 +198,7 @@ const Membres_electeurs = () =>{
                             </tbody>
                         </table>
                             <ReactPaginate 
-                            previousLabel={'Precedent'}
+                            previousLabel={'Précédent'}
                             nextLabel={'Suivant'}
                             breakLabel={'...'}
                             pageCount={numbers.length}
@@ -197,14 +206,14 @@ const Membres_electeurs = () =>{
                             pageRangeDisplayed={6}
                             onPageChange={handlePageClick}
                             containerClassName={'pagination justify-content-center'}
-                            pageClassName={'page-item'}
-                            pageLinkClassName={'page-link'}
-                            previousClassName={'page-item'}
-                            previousLinkClassName={'page-link'}
-                            nextClassName={'page-item'}
-                            nextLinkClassName={'page-link'}
-                            breakClassName={'page-item'}
-                            breakLinkClassName={'page-link'}
+                            pageClassName={'page-item roboto-font'}
+                            pageLinkClassName={'page-link rounded-0'}
+                            previousClassName={'page-item roboto-font'}
+                            previousLinkClassName={'page-link rounded-0'}
+                            nextClassName={'page-item roboto-font'}
+                            nextLinkClassName={'page-link rounded-0'}
+                            breakClassName={'page-item roboto-font'}
+                            breakLinkClassName={'page-link rounded-0'}
                             activeClassName={'active'}
                         />
                     </div>

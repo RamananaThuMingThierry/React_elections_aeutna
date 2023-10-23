@@ -50,7 +50,14 @@ const AdminPrivateRoute = ({...rest}) =>{
     });
 
     if(loading){
-        return <h1 className="text-center mt-4">loading...</h1>
+        return (
+            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
+                <div className="text-center">
+                    <h1 className="roboto-font text-bold">Chargement</h1>
+                    <h3 className="text-muted roboto-font">Veuillez patienter s'il vous plaît!</h3>        
+                </div>    
+            </div>
+        );
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = () =>{  
     const history = useHistory();
@@ -50,7 +50,7 @@ const Login = () =>{
 
     return (
         <>
-            <div className="container-fluid " style={{
+            <div className="container-fluid d-flex justify-content-center align-items-center" style={{
                         backgroundImage: `url(${process.env.PUBLIC_URL}/images/bg.jpg)`,
                         backgroundSize: 'cover',
                         width: '100vw',
@@ -68,6 +68,7 @@ const Login = () =>{
                                 <input type="password" placeholder="Mot de passe" name="password" onChange={handleInput} className="form-control" value={LoginInput.password} style={inputStyle}/>
                                 <span>{LoginInput.error_list.password}</span>
                             </div>
+                            <Link  to="/register">S'inscrire</Link>
                             <div className="form-group text-center" style={inputStyle}>
                                 <button type="submit" className="btn btn-primary">Se Connecter</button>
                             </div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import './App.css';
 import React from "react";
 import './assets/back_end/css/styles.css';
 import { Switch } from "react-router-dom";

@@ -15,6 +15,10 @@ import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
 import EditMembres from "../../components/back_end/electeurs/edit_membres";
 import ShowElecteurs from "../../components/back_end/electeurs/show_electeurs";
+import Non_adhere from "../../components/back_end/electeurs/non_adhere";
+import AddElecteurNonAdhere from "../../components/back_end/electeurs/add_electeur_non_adhere";
+import ShowElecteurNonAdhere from "../../components/back_end/electeurs/show_electeur_non_adhere";
+import EditElecteurNonAdhere from "../../components/back_end/electeurs/edit_electeur_non_adhere";
 
 class MasterLayout extends Component{
     render(){
@@ -35,12 +39,17 @@ class MasterLayout extends Component{
                                     <Route exact path="/admin/membres" component={Membres_electeurs} />
                                     {/* Listes des électeurs */}
                                     <Route exact path="/admin/listes-electeurs-membres" component={Liste_des_membres_electeurs} />
+                                    {/* Listes membres non adhéré */}
+                                    <Route exact path="/admin/liste-non-adhere" component={Non_adhere} />
                                     {/* Approuve membres AEUTNA */}
                                     <Route exact path="/admin/approuve-membres/:id" component={ApprouveMembres} />
                                     <Route exact path="/admin/add-membres" component={AddMembres} />
+                                    <Route exact path="/admin/add-nouveau-bachelier" component={AddElecteurNonAdhere} />
                                     <Route exact path="/admin/show-membre/:id" component={ShowMembres} />
                                     <Route exact path="/admin/show-electeur/:id" component={ShowElecteurs} />
+                                    <Route exact path="/admin/show-electeur-non-adhere/:id" component={ShowElecteurNonAdhere} />
                                     <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
+                                    <Route exact path="/admin/edit-electeur-non-adhere/:id" component={EditElecteurNonAdhere} />
 
                                     {/* Users */}
                                     {/* <Route exact path="/admin/users" component={Users} /> */}
