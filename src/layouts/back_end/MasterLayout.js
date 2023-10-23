@@ -14,6 +14,7 @@ import ErrorPage from '../../components/ErrorPage';
 import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
 import EditMembres from "../../components/back_end/electeurs/edit_membres";
+import ShowElecteurs from "../../components/back_end/electeurs/show_electeurs";
 
 class MasterLayout extends Component{
     render(){
@@ -37,7 +38,8 @@ class MasterLayout extends Component{
                                     {/* Approuve membres AEUTNA */}
                                     <Route exact path="/admin/approuve-membres/:id" component={ApprouveMembres} />
                                     <Route exact path="/admin/add-membres" component={AddMembres} />
-                                    <Route exact path="/admin/show-electeur/:id" component={ShowMembres} />
+                                    <Route exact path="/admin/show-membre/:id" component={ShowMembres} />
+                                    <Route exact path="/admin/show-electeur/:id" component={ShowElecteurs} />
                                     <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
 
                                     {/* Users */}

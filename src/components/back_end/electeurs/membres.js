@@ -176,7 +176,7 @@ const Membres_electeurs = () =>{
                                                 <td>{item.prenom}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
-                                                    <Link to={`show-electeur/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                    <Link to={`show-membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
                                                     <Link to={`edit-membres/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
                                                     <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
                                                     </div>
@@ -188,8 +188,6 @@ const Membres_electeurs = () =>{
                                 }
                             </tbody>
                         </table>
-                        {
-                            membresElecteursList.length > 10 ? 
                             <ReactPaginate 
                             previousLabel={'Precedent'}
                             nextLabel={'Suivant'}
@@ -209,8 +207,6 @@ const Membres_electeurs = () =>{
                             breakLinkClassName={'page-link'}
                             activeClassName={'active'}
                         />
-                            : ''
-                        }
                     </div>
                 </div>
             </div>

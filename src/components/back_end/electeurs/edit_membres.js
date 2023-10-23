@@ -51,9 +51,24 @@ const EditMembres = (props) =>{
         e.preventDefault();
 
         const id_membre = props.match.params.id;
+        
         const formData = new FormData();
 
         electeursInput.numero_carte = electeursInput.numero_carte ?? '';
+        electeursInput.nom = electeursInput.nom ?? '';
+        electeursInput.sexe = electeursInput.sexe ?? '';
+        electeursInput.cin = electeursInput.cin ?? '';
+        electeursInput.delivrance = electeursInput.delivrance ?? '';
+        electeursInput.ddn = electeursInput.ddn ?? '';
+        electeursInput.ldn = electeursInput.ldn ?? '';
+        electeursInput.adresse = electeursInput.adresse ?? '';
+        electeursInput.contact = electeursInput.contact ?? '';
+        electeursInput.axes = electeursInput.axes ?? '';
+        electeursInput.sympathisant = electeursInput.sympathisant ?? '';
+        electeursInput.filieres = electeursInput.filieres ?? '';
+        electeursInput.niveau = electeursInput.niveau ?? '';
+        electeursInput.facebook = electeursInput.facebook ?? '';
+        electeursInput.date_inscription = electeursInput.date_inscription ?? '';
 
         if(electeursInput.numero_carte == ''){
             swal("Warning", "Veuillez saisir le numér de ta carte A.E.U.T.N.A !", "warning");
@@ -106,11 +121,12 @@ const EditMembres = (props) =>{
             formData.append('sympathisant', electeursInput.sympathisant ?? 'Non');
             formData.append('facebook', electeursInput.facebook);
             formData.append('date_inscription', electeursInput.date_inscription);
-            
-            console.log(formData);
     
-            axios.put(`api/update-electeur/${id_membre}`, formData).then(res =>{
+            console.log(formData);
+
+            axios.post(`api/update-electeur/${id_membre}`, formData).then(res =>{
                 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';   
+                console.log(res.data);
                 if(res.data.status === 200){
                     swal("Success", res.data.message, "success");
                     history.push('/admin/membres');

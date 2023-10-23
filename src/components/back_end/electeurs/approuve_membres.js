@@ -51,6 +51,7 @@ const ApprouveMembres = (props) =>{
         const electeur_id = props.match.params.id;
         axios.get(`api/approuve-membres/${electeur_id}`).then(res =>{
             if(res.data.status === 200){
+                console.log(res.data.electeur);
                 setMembres(res.data.electeur);
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
@@ -82,7 +83,7 @@ const ApprouveMembres = (props) =>{
                             <div className="row">
                                     <div className="col-md-4 col-sm-6">
                                         <div className="d-flex justify-content-center">
-                                            <img style={{borderRadius: '5px'}} src={`${process.env.PUBLIC_URL}/images/photo.jpg`} width="250px" alt="Image"/>                                          
+                                            <img style={{borderRadius: '5px'}} src={showmembres.photo != null ? `http://localhost:8000/${showmembres.photo}` : `${process.env.PUBLIC_URL}/images/photo.jpg`} height="250px" width="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
                                     <div className="col-md-4">
@@ -151,7 +152,7 @@ const ApprouveMembres = (props) =>{
                                         <div className="col-md-8 offset-md-2">
                                             <div className="row">
                                                 <div className="col-md-6">
-                                                <Link to={`/admin/show-electeur/${showmembres.id}`} className="btn btn-danger p-3 rounded-0 w-100">Retour</Link>
+                                                <Link to={`/admin/show-electeur/${showmembres.id}`} className="btn btn-danger p-3 rounded-0 w-100">Annuler</Link>
                                                 </div>
                                                 <div className="col-md-6">
                                                 <button type="submit" className="btn btn-info p-3 rounded-0 w-100">Valider</button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
-const ShowMembres = (props) =>{
+const ShowElecteurs = (props) =>{
 
     const history = useHistory();
 
@@ -16,11 +16,31 @@ const ShowMembres = (props) =>{
                 setMembres(res.data.electeur);
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
+                history.push("/admin/liste_des_electeurs_membres");
+            }else if(res.data.status === 404){
+                swal("Error", res.data.message, "error");
                 history.push("/admin/dashboard");
             }
             setLoading(false);
         });
     },[props.match.params.id]);
+
+    const desapprouveHandle = (e) =>{
+        e.preventDefault();
+
+        const electeur_id = props.match.params.id;
+
+        axios.post(`api/desapprouve-membre-electeur/${electeur_id}`).then(res =>{
+            if(res.data.status === 200){
+                swal("Success", res.data.message, "success");
+                history.push('/admin/membres');
+            }else if(res.data.status === 400){
+                swal("Error", res.data.message, "error");
+                history.push("/admin/dashboard");
+            }
+        });
+
+    }
 
     if(loading){
         return (
@@ -44,7 +64,7 @@ const ShowMembres = (props) =>{
                             <div className="row">
                                     <div className="col-md-4">
                                         <div className="d-flex justify-content-center">
-                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${showmembres.photo}`} height="250px" width="250px" alt="Image"/>                                          
+                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${showmembres.photo}`} width="250px" height="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
                                     <div className="col-md-4">
@@ -132,11 +152,24 @@ const ShowMembres = (props) =>{
                                         <label style={{fontWeight: 'bold', fontSize: '17px'}}>Date d'inscription</label>
                                         <input className="form-control p-3 rounded-0" value={showmembres.date_inscription ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                     </div>
-                                    <div className="col-md-4 mt-4">
-                                      <Link to="/admin/membres" className="btn btn-primary p-3 rounded-1 w-100">Retour</Link>
+                                    <div className="col-md-4">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}}>Secteurs</label>
+                                        <input className="form-control p-3 rounded-0" value={showmembres.secteurs ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}}>Votes</label>
+                                        <input className="form-control p-3 rounded-0" value={showmembres.cin == 'cin' ? 'C.I.N' : 'Carte A.E.U.T.N.A'} disabled style={{backgroundColor:'white'}}/>
+                                    </div>
+                                </div> 
+                                {/* Filières, Niveau */}
+                                <div className="row">
+                                    <div className="col-md-4">
                                     </div>
                                     <div className="col-md-4 mt-4">
-                                    <Link to={`/admin/approuve-membres/${showmembres.id}`} className="btn btn-warning p-3 rounded-1 w-100">Approuve</Link>
+                                      <Link to="/admin/listes-electeurs-membres" className="btn btn-danger p-3 rounded-0 w-100">Retour</Link>
+                                    </div>
+                                    <div className="col-md-4 mt-4">
+                                    <Link type="button" onClick={desapprouveHandle} className="btn btn-warning p-3 rounded-0 w-100">Désapprouver</Link>
                                       </div>
                                 </div> 
                         </div>
@@ -147,4 +180,4 @@ const ShowMembres = (props) =>{
     );
 }
 
-export default ShowMembres;
+export default ShowElecteurs;

@@ -80,6 +80,9 @@ const AddMembres = () =>{
         else if(electeursInput.axes != '' && electeursInput.sympathisant == 'Oui'){
                 swal("Warning", "Vous n'êtes pas sympathisnat !", "warning");
         }else{
+
+            
+
             formData.append('photo', image);
             formData.append('numero_carte', electeursInput.numero_carte);
             formData.append('nom', electeursInput.nom);
