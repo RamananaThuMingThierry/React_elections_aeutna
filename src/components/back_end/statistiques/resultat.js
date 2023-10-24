@@ -24,7 +24,15 @@ useEffect(() =>{
    });
 },[]);
 
-console.log('Membres AEUTNA', membresAEUTNA);
+if(loading){
+  return (
+      <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
+          <div className="text-center">
+              <h2 className="text-muted roboto-font">Veuillez patienter s'il vous plaît...!</h2>        
+          </div>    
+      </div>
+  );
+}
 
 const data = [
   { name: 'Groupe A', value: membresAEUTNA }, // Membres AEUTNA

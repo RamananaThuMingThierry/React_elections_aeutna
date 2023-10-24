@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import swal from 'sweetalert';
 import { useHistory } from "react-router-dom";
+import BASE_URL from "../../../BasesUrl";
 
 const EditMembres = (props) =>{
 
@@ -154,7 +155,7 @@ const EditMembres = (props) =>{
         <div className="row">
             <div className="col-md-12">
                 <div className="card elevation-1 border-0 rounded-0 mt-2">
-                    <h3 className="text-center text-muted my-3">Ajouter un nouveau membres AEUTNA</h3>
+                    <h3 className="text-center text-muted my-3">Modifier un membre</h3>
                 </div>
             </div>
         </div>
@@ -168,7 +169,7 @@ const EditMembres = (props) =>{
                                     <div className="d-flex flex-column justify-content-center align-items-center">
                                         {
                                             picture.photo == '' ?
-                                                <img className="mb-1 rounded-1" src={electeursInput.photo != null ? `http://localhost:8000/${electeursInput.photo}` :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="189px" width="189px" alt="Image"/>                                          
+                                                <img className="mb-1 rounded-1" src={electeursInput.photo != null ? `${BASE_URL}/${electeursInput.photo}` :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="189px" width="189px" alt="Image"/>                                          
                                             :
                                         <img className="mb-1 rounded-1" src={picture.picture != picture ? picture :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="189px" width="189px" alt="Image"/>                                          
                                             }

@@ -111,6 +111,7 @@ const AddMembres = () =>{
     
             axios.post(`api/store-electeur`, formData).then(res =>{
                 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';   
+                console.log(res.data);
                 if(res.data.status === 200){
                     swal("Success", res.data.message, "success");
                     history.push('/admin/membres');

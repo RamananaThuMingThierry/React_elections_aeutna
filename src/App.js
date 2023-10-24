@@ -8,7 +8,7 @@ import PublicRoute from "./PublicRoute";
 import BASE_URL from "./BasesUrl";
 axios.defaults.baseURL = BASE_URL;
 // axios.defaults.baseURL ="http://localhost:8000";
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
 axios.defaults.withCredentials = true;
 axios.interceptors.request.use(function(config){

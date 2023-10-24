@@ -29,18 +29,15 @@ const ApprouveMembres = (props) =>{
             votes: approuveInput.votes
         }
 
-        console.log(data);
-
         if(data.secteurs == ''){
             swal("Info", "Veuillez séléctionner son secteur !", "info");
         }else if(data.votes == ''){
             swal("Warning", "Veuillez séléctionner son pièce jointe !", "warning");
         }else{
-            console.log("Je suis là !");
             axios.post(`api/valide_membres_electeurs/${id_electeur}`, data).then(res =>{
                 if(res.data.status  === 200){
                     swal("Success", res.data.message,"success");
-                    history.push("/admin/membres");
+                    history.push("/admin/listes-electeurs-membres");
                 }else if(res.data.status === 404){
                     swal("Warning", res.data.message,"warning");
                 }
@@ -146,8 +143,8 @@ const ApprouveMembres = (props) =>{
                                             <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Vote</label>
                                             <select className="form-select rounded-0 p-3 roboto-font" name="votes" value={approuveInput.votes} onChange={handleInput}>
                                                 <option value="" selected>Ouvre ce menu de séléction</option>
+                                                <option value="numero_carte">Carte A.E.U.T.N.A</option>
                                                 <option value="cin">C.I.N</option>
-                                                <option value="numero_carte">Numéro Carte</option>
                                             </select>
                                         </div>
                                     </div> 

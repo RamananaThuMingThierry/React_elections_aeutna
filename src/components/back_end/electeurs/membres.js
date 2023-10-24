@@ -80,7 +80,7 @@ const Membres_electeurs = () =>{
         if(data.search == ''){
             swal("Warning", "Veuillez entrer la valuer à recherche !", "warning");
         }else if(data.select == ''){
-            swal("Warning", "Voulez-vous séléctionner par quoi ?", "warning");
+            swal("Warning", "Voulez-vous faire une recherche par quoi ?", "warning");
         }else{
             axios.get(`api/recherche_membres/${data.select}/${data.search}`).then(res =>{
                 console.log(res.data);
@@ -109,7 +109,7 @@ const Membres_electeurs = () =>{
           })
           .then((willDelete) => {
             if (willDelete) {
-                axios.delete(`api/delete-electeur/${id}`).then(res =>{
+                axios.post(`api/delete-electeur/${id}`).then(res =>{
                     if(res.data.status === 200){
                         swal("Success", res.data.message, "success");
                         Refresh(e); 

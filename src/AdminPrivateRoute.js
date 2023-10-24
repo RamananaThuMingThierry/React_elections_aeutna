@@ -12,7 +12,7 @@ const AdminPrivateRoute = ({...rest}) =>{
 
     useEffect(() =>{
         axios.get(`api/checkingAuthenticated`).then(res =>{
-            if(res.status === 200){
+            if(res.data.status === 200){
                 setAuthenticated(true);
             }
             setLoading(false);
@@ -37,11 +37,11 @@ const AdminPrivateRoute = ({...rest}) =>{
         
         if(error.response.status === 403) // Access Denied
         {
-            swal("Forbidden", error.response.data.message, "warning");
+            swal("Interdit", error.response.data.message, "warning");
             history.push("/403");
         }else if(error.response.status === 404) // Page not found
         {
-            swal("404 Error", "Url/Page Not Found", "warning");
+            swal("Erreur 404", "Url/Page non trouvé !", "warning");
             history.push("/404");
         }
         return Promise.reject(error);

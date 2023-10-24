@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import BASE_URL from "../../../BasesUrl";
 const ShowMembres = (props) =>{
 
     const history = useHistory();
@@ -11,7 +12,7 @@ const ShowMembres = (props) =>{
 
     useEffect(() =>{ 
         const electeur_id = props.match.params.id;
-        axios.get(`api/show-electeur/${electeur_id}`).then(res =>{
+        axios.get(`${BASE_URL}/api/show-electeur/${electeur_id}`).then(res =>{
             if(res.data.status === 200){
                 setMembres(res.data.electeur);
             }else if(res.data.status === 400){
@@ -19,6 +20,8 @@ const ShowMembres = (props) =>{
                 history.push("/admin/dashboard");
             }
             setLoading(false);
+        }) .catch(error => {
+            swal("Error", "Une erreur s'est produite lors de l'appel à l'API", "error");
         });
     },[props.match.params.id]);
 
@@ -48,7 +51,7 @@ const ShowMembres = (props) =>{
                             <div className="row">
                                     <div className="col-md-4">
                                         <div className="d-flex justify-content-center">
-                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${showmembres.photo}`} height="250px" width="250px" alt="Image"/>                                          
+                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${showmembres.photo}`} height="250px" width="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
                                     <div className="col-md-4">
@@ -108,7 +111,7 @@ const ShowMembres = (props) =>{
                                     </div>
                                     <div className="col-md-4">
                                         <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Contact</label>
-                                        <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.concat ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                        <input className="form-control p-3 rounded-0 roboto-font" value={showmembres.contact ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                     </div>
                                     <div className="col-md-4">
                                         <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Niveau</label>

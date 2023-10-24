@@ -8,7 +8,7 @@ import ShowMembres from "../../components/back_end/electeurs/show_membres";
 import Navbar from "./Navbar";
 import Aside from "./Aside";
 import Footer from "./Footer";
-import Liste_des_membres_electeurs from "../../components/back_end/electeurs/listes_membres_electeurs";
+import Liste_des_membres_electeurs from "../../components/back_end/electeurs/liste_des_electeurs";
 import ApprouveMembres from "../../components/back_end/electeurs/approuve_membres";
 import ErrorPage from '../../components/ErrorPage';
 import '../../assets/back_end/css/styles.css';

@@ -80,7 +80,7 @@ const Liste_des_membres_electeurs = () =>{
         if(data.search == ''){
             swal("Warning", "Veuillez entrer la valuer à recherche !", "warning");
         }else if(data.select == ''){
-            swal("Warning", "Voulez-vous séléctionner par quoi ?", "warning");
+            swal("Warning", "Voulez-vous faire une recherche par quoi ?", "warning");
         }else{
             axios.get(`api/recherche_membre_electeurs/${data.select}/${data.search}`).then(res =>{
                 console.log(res.data);
@@ -103,7 +103,7 @@ const Liste_des_membres_electeurs = () =>{
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex text-muted roboto-font justify-content-between">
                         <h2>
-                            Liste des électeurs membres A.E.U.T.N.A
+                            Liste des électeurs
                         </h2>
                         <div>
                         <button onClick={Refresh} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 
@@ -139,9 +139,9 @@ const Liste_des_membres_electeurs = () =>{
                                 <tr>
                                     <th className="roboto-font">Photos</th>
                                     <th className="roboto-font">Numéro carte</th>
-                                    <th className="roboto-font">Noms</th>
-                                    <th className="roboto-font">Prénoms</th>
+                                    <th className="roboto-font">Noms et Prénoms</th>
                                     <th className="roboto-font">Votes</th>
+                                    <th className="roboto-font">Secteurs</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -152,9 +152,9 @@ const Liste_des_membres_electeurs = () =>{
                                             <tr key={item.id}>
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
-                                                <td className="roboto-font">{item.nom}</td>
-                                                <td className="roboto-font">{item.prenom}</td>
+                                                <td className="roboto-font">{`${item.nom} ${item.prenom}`}</td>
                                                 <td className="roboto-font">{item.votes == 'cin' ? 'C.I.N' : item.votes == 'Convocation' ? item.votes : 'Carte A.E.U.T.N.A'}</td>
+                                                <td className="roboto-font">{item.secteurs}</td>
                                                 <td className="text-center">
                                                 {
                                                     item.numero_carte == null 
