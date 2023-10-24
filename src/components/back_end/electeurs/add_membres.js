@@ -62,6 +62,8 @@ const AddMembres = () =>{
             swal("Warning", "Votre numéro de C.I.N invalide !", "warning");
         }else if(electeursInput.cin != '' && electeursInput.delivrance == ''){
             swal("Warning", "Veuillez saisir la date de délivrance de votre C.I.N !", "warning");
+        }else if(electeursInput.delivrance != '' && electeursInput.cin == ''){
+            swal("Warning", "Veuillez saisir la date de délivrance de votre C.I.N !", "warning");
         }else if(electeursInput.ddn == ''){
             swal("Warning", "Veuillez saisir votre date de naissance !", "warning");
         }else if(electeursInput.ldn == ''){
@@ -70,6 +72,8 @@ const AddMembres = () =>{
             swal("Warning", "Veuillez saisir votre adresse !", "warning");
         }else if(electeursInput.contact == ''){
             swal("Warning", "Veuillez saisir votre contact !", "warning");
+        }else if(electeursInput.contact != '' && electeursInput.contact.length != 10){
+            swal("Warning", "Votre contact invalide !", "warning");
         }else if(electeursInput.axes == '' && (electeursInput.sympathisant == 'Non' || electeursInput.sympathisant == '')){
                 swal("Warning", "Veuillez séléctionner votre axes !", "warning");
         }else if(electeursInput.date_inscription == ''){

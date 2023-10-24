@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import BASE_URL from "../../../BasesUrl";
 const ShowElecteurs = (props) =>{
 
     const history = useHistory();
@@ -68,7 +69,7 @@ const ShowElecteurs = (props) =>{
                             <div className="row">
                                     <div className="col-md-4">
                                         <div className="d-flex justify-content-center">
-                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${showmembres.photo}`} width="250px" height="250px" alt="Image"/>                                          
+                                            <img style={{borderRadius: '5px'}} src={showmembres.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${showmembres.photo}`} width="250px" height="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
                                     <div className="col-md-4">

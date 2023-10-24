@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import BASE_URL from "../../../BasesUrl";
 const ApprouveMembres = (props) =>{
 
     const history = useHistory();
@@ -87,7 +88,7 @@ const ApprouveMembres = (props) =>{
                             <div className="row">
                                     <div className="col-md-4 col-sm-6 mt-2">
                                         <div className="d-flex justify-content-center">
-                                            <img style={{borderRadius: '5px'}} src={showmembres.photo != null ? `http://localhost:8000/${showmembres.photo}` : `${process.env.PUBLIC_URL}/images/photo.jpg`} height="250px" width="250px" alt="Image"/>                                          
+                                            <img style={{borderRadius: '5px'}} src={showmembres.photo != null ? `${BASE_URL}/${showmembres.photo}` : `${process.env.PUBLIC_URL}/images/photo.jpg`} height="250px" width="250px" alt="Image"/>                                          
                                         </div>
                                     </div>
                                     <div className="col-md-4 mt-2">

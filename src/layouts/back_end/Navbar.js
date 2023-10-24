@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
 import axios from "axios";
 import swal from "sweetalert";
+import ToggleBodyClass from "../../components/back_end/constant";
 const Navbar = () =>{
 
     const history = useHistory();
+
+    
     const Logout = (e) =>{
         const thisClicked = e.currentTarget;
         swal({
@@ -39,7 +42,7 @@ const Navbar = () =>{
     return (
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <Link className="navbar-brand ps-3 roboto-font" to="/admin/dashboard">Élections 2023</Link>
-      <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i className="fas fa-bars"></i></button>
+      <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" onClick={ToggleBodyClass} id="sidebarToggle"><i className="fas fa-bars"></i></button>
       <ul className="navbar-nav d-flex d-md-inline-block rounded-0 form-inline ms-auto  me-lg-4">
           <li className="nav-item dropdown rounded-0">
               <Link className="nav-link dropdown-toggle" id="navbarDropdown" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-solid"></i></Link>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import BASE_URL from "../../../BasesUrl";
 const ShowElecteurNonAdhere = (props) =>{
 
     const history = useHistory();
@@ -11,7 +12,8 @@ const ShowElecteurNonAdhere = (props) =>{
 
     useEffect(() =>{ 
         const electeur_id = props.match.params.id;
-        axios.get(`api/show-electeur/${electeur_id}`).then(res =>{
+        axios.get(`${BASE_URL}/api/show-electeur/${electeur_id}`).then(res =>{   
+            console.log(res.data);
             if(res.data.status === 200){
                 setMembres(res.data.electeur);
             }else if(res.data.status === 400){

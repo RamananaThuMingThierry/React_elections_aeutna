@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
+import BASE_URL from "../../../BasesUrl";
 
 const Liste_des_membres_electeurs = () =>{
     
@@ -149,7 +150,7 @@ const Liste_des_membres_electeurs = () =>{
                                     records.map(item => {
                                         return (
                                             <tr key={item.id}>
-                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
+                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom}</td>

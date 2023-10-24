@@ -1,20 +1,42 @@
-import React from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import axios from "axios";
 
 const Resultat = () =>{
-
   
+const [loading, setLoading] = useState(true);
+const [membresAEUTNA, setMembresAEUTNA] = useState(0);
+const [electeursMembres, setElecteursMembres] = useState(0);
+const [electeursNonAdheres, setElecteursNonAdheres] = useState(0);
+const [electeursVotes, setElecteursVotes] = useState(0);
+
+useEffect(() =>{
+
+  axios.get(`api/resultat`).then(res =>{
+    console.log(res.data.MembresAEUTNA);
+      if(res.data.status === 200){
+        setMembresAEUTNA(res.data.MembresAEUTNA);
+        setElecteursMembres(res.data.ElecteursMembres);
+        setElecteursNonAdheres(res.data.ElecteursNonAdheres);
+        setElecteursVotes(res.data.Electeursvotes);
+       }
+       setLoading(false);
+   });
+},[]);
+
+console.log('Membres AEUTNA', membresAEUTNA);
+
 const data = [
-  { name: 'Groupe A', value: 750 }, // Membres AEUTNA
-  { name: 'Groupe B', value: 900 }, // Electeurs Votes
-  { name: 'Groupe C', value: 700 }, // Electeurs Membres
-  { name: 'Groupe D', value: 200 }, // Electeurs Non adhéré
+  { name: 'Groupe A', value: membresAEUTNA }, // Membres AEUTNA
+  { name: 'Groupe B', value:  electeursVotes }, // Electeurs Votes
+  { name: 'Groupe C', value:  electeursMembres }, // Electeurs Membres
+  { name: 'Groupe D', value:  electeursNonAdheres }, // Electeurs Non adhéré
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   return (
-    <div className="container-fluid">
+    <Fragment>
       <div className="row">
           <div className="col-md-12">
             <div className="card elevation-1 border-0 rounded-0 mt-2">
@@ -34,35 +56,34 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
               <div className="card elevation-1 border-0 rounded-0 mt-2" style={{backgroundColor:'#0088FE'}}>
                   <h3 className="text-center roboto-font mt-4 my-3 text-white">Membres AEUTNA</h3>
                   <hr/>
-                  <h1 className="text-center roboto-font my-3 text-white">750</h1>
+                  <h1 className="text-center roboto-font my-3 text-white">{membresAEUTNA}</h1>
               </div>
           </div>
           <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 mt-2" style={{backgroundColor:'#FFBB28'}}>
                   <h3 className="text-center roboto-font mt-4 my-3 text-white">Electeurs membres</h3>
                   <hr/>
-                  <h1 className="text-center roboto-font my-3 text-white">700</h1>
+                  <h1 className="text-center roboto-font my-3 text-white">{electeursMembres}</h1>
               </div>
           </div>
           <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 mt-2" style={{backgroundColor:'#FF8042'}}>
                   <h3 className="text-center roboto-font mt-4 text-white my-3">Electeurs non adhérés</h3>
                   <hr/>
-                  <h1 className="text-center roboto-font my-3 text-white">200</h1>
+                  <h1 className="text-center roboto-font my-3 text-white">{electeursNonAdheres}</h1>
               </div>
           </div>
           <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 mt-2" style={{backgroundColor:'#00C49F'}}>
                   <h3 className="text-center roboto-font mt- text-white mt-4 my-3">Electeurs Votes</h3>
                   <hr/>
-                  <h1 className="text-center roboto-font my-3 text-white">900</h1>
+                  <h1 className="text-center roboto-font my-3 text-white">{electeursVotes}</h1>
               </div>
           </div>
         </div>
 
         <div className="col-md-12">
           <div className="card elevation-1 border-0 rounded-0 mt-2">
-
             <ResponsiveContainer width="100%" height={480}>
                   <PieChart>
                     <Pie
@@ -83,7 +104,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
             </ResponsiveContainer>
           </div>
         </div>
-    </div>
+    </Fragment>
   );
 }
 

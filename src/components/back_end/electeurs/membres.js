@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import '@fontsource/roboto';
 import ReactPaginate from 'react-paginate';
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
-import ChargingAnimation from "../chargments/chargementAnimation";
+import BASE_URL from "../../../BasesUrl";
 
 const Membres_electeurs = () =>{
     
@@ -38,7 +38,7 @@ const Membres_electeurs = () =>{
         axios.get(`api/membres`).then(res =>{
             if(res.status === 200){
                 setMembresElecteursList(res.data.electeurs_membres);   
-            }
+                }
              setLoading(false);
          });
      },[]);
@@ -126,14 +126,14 @@ const Membres_electeurs = () =>{
     }
 
     return (
-        <div className="container-fluid">
+        <Fragment>
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between">
-                        <h2 className="roboto-font text-muted">
+                        <h3 className="roboto-font text-muted mt-2">
                             Liste des membres A.E.U.T.N.A
-                        </h2>
+                        </h3>
                         <div className="group-bnt mt-1">
                             <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
                             <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
@@ -179,7 +179,7 @@ const Membres_electeurs = () =>{
                                     records.map(item => {
                                         return (
                                             <tr key={item.id}>
-                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `http://localhost:8000/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
+                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom}</td>
@@ -219,7 +219,7 @@ const Membres_electeurs = () =>{
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     );
 }
 export default Membres_electeurs;

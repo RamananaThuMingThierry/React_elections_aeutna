@@ -17,11 +17,9 @@ const AdminPrivateRoute = ({...rest}) =>{
             }
             setLoading(false);
         });
-
         return () =>{
             setAuthenticated(false);
         };
-
     }, []);
 
 
