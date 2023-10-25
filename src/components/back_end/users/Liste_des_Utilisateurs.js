@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
 
-const Membres_electeurs = () =>{
+const Liste_des_Utilisateurs = () =>{
     
     const [loading, setLoading] = useState(true);
     
@@ -20,13 +20,13 @@ const Membres_electeurs = () =>{
         setSearch({...searchInput, [e.target.name]: e.target.value});
     }
 
-    const [membresElecteursList, setMembresElecteursList] = useState([]);
+    const [liste_utilisateurs, setliste_utilisateurs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 10;
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
-    const records = membresElecteursList.slice(firstIndex, lastIndex);
-    const npage = Math.ceil(membresElecteursList.length / recordsPerPage);
+    const records = liste_utilisateurs.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(liste_utilisateurs.length / recordsPerPage);
     const numbers = [...Array(npage +1).keys()].slice(1);
     
     const  handlePageClick = (data) => {
@@ -35,9 +35,9 @@ const Membres_electeurs = () =>{
 
     useEffect(() =>{
 
-        axios.get(`api/membres`).then(res =>{
+        axios.get(`api/users`).then(res =>{
             if(res.status === 200){
-                setMembresElecteursList(res.data.electeurs_membres);   
+                setliste_utilisateurs(res.data.users);   
                 }
              setLoading(false);
          });
@@ -48,7 +48,7 @@ const Membres_electeurs = () =>{
             <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
                 <div className="text-center">
                     <h1 className="roboto-font">Chargment...</h1>
-                    <h2 className="text-muted roboto-font">Listes membres A.E.U.T.N.A</h2>        
+                    <h2 className="text-muted roboto-font">Liste des utilisateurs</h2>        
                 </div>    
             </div>
         );
@@ -61,9 +61,9 @@ const Membres_electeurs = () =>{
         searchInput.search = '';
         searchInput.select = '';
 
-        axios.get(`api/membres`).then(res =>{
+        axios.get(`api/users`).then(res =>{
             if(res.status === 200){
-                setMembresElecteursList(res.data.electeurs_membres);   
+                setliste_utilisateurs(res.data.electeurs_membres);   
             }
          });
     }
@@ -86,7 +86,7 @@ const Membres_electeurs = () =>{
                 console.log(res.data);
                 if(res.data.status  === 200){
                     console.log(res.data.recherche_membres);
-                    setMembresElecteursList(res.data.recherche_membres);
+                    setliste_utilisateurs(res.data.recherche_membres);
                 }else if(res.data.status === 400){
                     swal("Info", res.data.message,"info");
                 }else if(res.data.status === 404){
@@ -96,13 +96,13 @@ const Membres_electeurs = () =>{
         }
     }
 
-    const deleteElecteursMembres = (e, id) =>{
+    const deleteUtilisateurs = (e, id) =>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Suppression";
 
         swal({
             title: "Vous êtes sûr?",
-            text: "Voulez-vous vraiment supprimer cet électeur?",
+            text: "Voulez-vous vraiment supprimer cet utilisateurs?",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -132,11 +132,10 @@ const Membres_electeurs = () =>{
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between">
                         <h3 className="roboto-font text-muted mt-2">
-                            Liste des membres A.E.U.T.N.A
+                            Liste des utilisateurs
                         </h3>
                         <div className="group-bnt mt-1">
                             <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
-                            <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
                         </div>
                         </div>
                         </div>
@@ -150,10 +149,7 @@ const Membres_electeurs = () =>{
                                 <input type="search" name="search" className="roboto-font form-control rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
                                 <select className="form-select roboto-font" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
                                     <option value="" selected>Ouvre ce menu de séléction</option>
-                                    <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
-                                    <option value="prenom">Prénom</option>
-                                    <option value="cin">C.I.N</option>
                                 </select>
                                 <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherce</button>
                             </div>
@@ -168,9 +164,8 @@ const Membres_electeurs = () =>{
                             <thead>
                                 <tr>
                                     <th className="roboto-font">Photos</th>
-                                    <th className="roboto-font">Numéro carte</th>
-                                    <th className="roboto-font">Noms</th>
-                                    <th className="roboto-font">Prénoms</th>
+                                    <th className="roboto-font">Pseudo</th>
+                                    <th className="roboto-font">Adresse e-mail</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -179,15 +174,14 @@ const Membres_electeurs = () =>{
                                     records.map(item => {
                                         return (
                                             <tr key={item.id}>
-                                                <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
-                                                <td className="roboto-font">{item.numero_carte ?? '-'}</td>
-                                                <td className="roboto-font">{item.nom}</td>
-                                                <td className="roboto-font">{item.prenom}</td>
+                                                <td><img src={item.image == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
+                                                <td className="roboto-font">{item.pseudo ?? '-'}</td>
+                                                <td className="roboto-font">{item.email}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                     <Link to={`show-membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
                                                     <Link to={`edit-membres/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
-                                                    <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
+                                                    <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteUtilisateurs(e, item.id)}><i className="fas fa-trash"></i></button>
                                                     </div>
                                                 </td>
 
@@ -197,13 +191,14 @@ const Membres_electeurs = () =>{
                                 }
                             </tbody>
                         </table>
-                            <ReactPaginate 
+                    </div>
+                    <ReactPaginate 
                             previousLabel={'Précédent'}
                             nextLabel={'Suivant'}
                             breakLabel={'...'}
                             pageCount={numbers.length}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={1}
+                            marginPagesDisplayed={3}
+                            pageRangeDisplayed={6}
                             onPageChange={handlePageClick}
                             containerClassName={'pagination justify-content-center'}
                             pageClassName={'page-item roboto-font'}
@@ -216,10 +211,9 @@ const Membres_electeurs = () =>{
                             breakLinkClassName={'page-link rounded-0'}
                             activeClassName={'active'}
                         />
-                    </div>
                 </div>
             </div>
         </Fragment>
     );
 }
-export default Membres_electeurs;
+export default Liste_des_Utilisateurs;

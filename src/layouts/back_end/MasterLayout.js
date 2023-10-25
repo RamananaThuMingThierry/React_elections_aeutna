@@ -20,6 +20,7 @@ import AddElecteurNonAdhere from "../../components/back_end/electeurs/add_electe
 import ShowElecteurNonAdhere from "../../components/back_end/electeurs/show_electeur_non_adhere";
 import EditElecteurNonAdhere from "../../components/back_end/electeurs/edit_electeur_non_adhere";
 import Resultat from "../../components/back_end/statistiques/resultat";
+import Liste_des_Utilisateurs from "../../components/back_end/users/Liste_des_Utilisateurs";
 
 class MasterLayout extends Component{
     render(){
@@ -38,10 +39,12 @@ class MasterLayout extends Component{
                                     <Route exact path="/admin/profile" component={Profile} />
                                     {/* Membres */}
                                     <Route exact path="/admin/membres" component={Membres_electeurs} />
-                                    {/* Listes des électeurs */}
+                                    {/* liste des électeurs */}
                                     <Route exact path="/admin/listes-electeurs-membres" component={Liste_des_membres_electeurs} />
-                                    {/* Listes membres non adhéré */}
+                                    {/* liste membres non adhéré */}
                                     <Route exact path="/admin/liste-non-adhere" component={Non_adhere} />
+                                    {/* Liste des utilisateurs */}
+                                    <Route exact path="/admin/liste_utilisateurs" component={Liste_des_Utilisateurs} />
                                     {/* Approuve membres AEUTNA */}
                                     <Route exact path="/admin/approuve-membres/:id" component={ApprouveMembres} />
                                     <Route exact path="/admin/add-membres" component={AddMembres} />
@@ -52,9 +55,6 @@ class MasterLayout extends Component{
                                     <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
                                     <Route exact path="/admin/edit-electeur-non-adhere/:id" component={EditElecteurNonAdhere} />
                                     <Route exact path="/admin/resultat" component={Resultat} />
-
-                                    {/* Users */}
-                                    {/* <Route exact path="/admin/users" component={Users} /> */}
 
                                     {/* Page d'erreurs */}
                                     <Route component={ErrorPage}/>

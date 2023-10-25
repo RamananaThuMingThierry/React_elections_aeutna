@@ -22,7 +22,6 @@ const AdminPrivateRoute = ({...rest}) =>{
         };
     }, []);
 
-
     axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err){
         if(err.response.status === 401){
             swal("Vous n'avez pas eu accès!", err.response.data.message, "warning");
