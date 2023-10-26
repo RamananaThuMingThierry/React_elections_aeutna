@@ -15,6 +15,7 @@ const ShowMembres = (props) =>{
         axios.get(`${BASE_URL}/api/show-electeur/${electeur_id}`).then(res =>{
             if(res.data.status === 200){
                 setMembres(res.data.electeur);
+                console.log(res.data.electeur);
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
                 history.push("/admin/dashboard");

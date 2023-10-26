@@ -23,6 +23,7 @@ const EditMembres = (props) =>{
     useEffect(() =>{
         const id_membre = props.match.params.id;
         axios.get(`api/edit-electeur/${id_membre}`).then(res =>{
+            console.log(res.data.membre);
             if(res.data.status === 200){
                 setElecteurs(res.data.membre);
             }else if(res.data.status === 404){
@@ -59,7 +60,7 @@ const EditMembres = (props) =>{
         electeursInput.nom = electeursInput.nom ?? '';
         electeursInput.sexe = electeursInput.sexe ?? '';
         electeursInput.cin = electeursInput.cin ?? '';
-        electeursInput.delivrance = electeursInput.delivrance ?? '';
+        electeursInput.delivrance_cin = electeursInput.delivrance_cin ?? '';
         electeursInput.ddn = electeursInput.ddn ?? '';
         electeursInput.ldn = electeursInput.ldn ?? '';
         electeursInput.adresse = electeursInput.adresse ?? '';
@@ -80,9 +81,9 @@ const EditMembres = (props) =>{
         }else if(electeursInput.cin != '' && electeursInput.cin.length != 12){
             swal("Warning", "Votre numéro de C.I.N invalide !", "warning");
         }
-        else if(electeursInput.cin != '' && electeursInput.delivrance == ''){
+        else if(electeursInput.cin != '' && electeursInput.delivrance_cin == ''){
             swal("Warning", "Veuillez indiquer le lieu de délivrance de votre C.I.N !", "warning");
-        }else if(electeursInput.cin == '' && electeursInput.delivrance != ''){
+        }else if(electeursInput.cin == '' && electeursInput.delivrance_cin != ''){
             swal("Warning", "Veuillez saisir votre numéro de C.I.N !", "warning");
         }
         else if(electeursInput.ddn == ''){
@@ -113,7 +114,7 @@ const EditMembres = (props) =>{
             formData.append('ldn', electeursInput.ldn);
             formData.append('sexe', electeursInput.sexe);
             formData.append('cin', electeursInput.cin);
-            formData.append('delivrance', electeursInput.delivrance);
+            formData.append('delivrance_cin', electeursInput.delivrance_cin);
             formData.append('filieres', electeursInput.filieres);
             formData.append('niveau', electeursInput.niveau);
             formData.append('adresse', electeursInput.adresse);
@@ -207,8 +208,8 @@ const EditMembres = (props) =>{
                                             <input maxLength={12} minLength={12} className="form-control p-3 rounded-0" id="cin" type="number" onChange={handleInput} value={electeursInput.cin ?? ''} autoComplete="false" placeholder="Saisir votre Numéro de C.I.N" name="cin"/>
                                         </div>
                                         <div className="col-md-12">
-                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} for="delivrance">Lieu de délivrance</label>
-                                            <input className="form-control p-3 rounded-0" type="text" value={electeursInput.delivrance ?? ''} id="delivrance" name="delivrance" autoComplete="false" onChange={handleInput} placeholder="Saisir le lieu de délivrance de votre C.I.N"/>
+                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} for="delivrance_cin">Lieu de délivrance</label>
+                                            <input className="form-control p-3 rounded-0" type="text" value={electeursInput.delivrance_cin ?? ''} id="delivrance_cin" name="delivrance_cin" autoComplete="false" onChange={handleInput} placeholder="Saisir le lieu de délivrance de votre C.I.N"/>
                                         </div>
                                     </div>
                                 </div>

@@ -166,6 +166,7 @@ const Liste_des_Utilisateurs = () =>{
                                     <th className="roboto-font">Photos</th>
                                     <th className="roboto-font">Pseudo</th>
                                     <th className="roboto-font">Adresse e-mail</th>
+                                    <th className="roboto-font">Rôles</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -177,6 +178,7 @@ const Liste_des_Utilisateurs = () =>{
                                                 <td><img src={item.image == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.pseudo ?? '-'}</td>
                                                 <td className="roboto-font">{item.email}</td>
+                                                <td className="roboto-font">{item.roles === 0 ? 'Utilisateurs' : 'Administrateurs'}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                     <Link to={`show-membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>

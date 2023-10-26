@@ -78,6 +78,10 @@ const AddElecteurNonAdhere = () =>{
                 }else if(res.data.status === 404){
                     swal("Warning", res.data.message, "warning");
                 }else if(res.data.status === 422){
+                    history.push('/admin/liste-non-adhere');
+                }else if(res.data.status === 400){
+                    swal("Avertissement", res.data.message, "error");
+                }else if(res.data.status === 422){
                     swal("Warning", res.data.message, "warning");
                 }
             });
