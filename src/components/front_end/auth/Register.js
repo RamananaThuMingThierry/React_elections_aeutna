@@ -34,7 +34,7 @@ const Register = () =>{
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.password);
                     swal("Success", res.data.message,"success");
-                    history.push("/admin/dashboard");
+                    history.push("/admin/tableau_de_bord");
                 }else{
                     setRegister({...registerInput, error_list: res.data.Validation_errors});
                 }
@@ -87,7 +87,7 @@ const Register = () =>{
                         <button className="btn btn-dark btn-lg btn-block w-50 rounded-0 roboto-font" type="submit">S'inscrire</button>
                         </div>
                         <p className="mb-5 text-center roboto-font pb-lg-2" style={{color:'#393f81'}}>J'ai déjà un compte? <Link type="#" to="/"
-                            style={{color:'#393f81'}}>S'inscrire</Link></p>
+                            style={{color:'#393f81'}}>Se connecter</Link></p>
                     </form>
                     </div>
                 </div>

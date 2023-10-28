@@ -4,7 +4,7 @@ import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
 import axios from "axios";
 import swal from "sweetalert";
-import ToggleBodyClass from "../../components/back_end/constant";
+import ToggleBodyClass from "../../components/back_end/constants/constant";
 const Navbar = () =>{
 
     const history = useHistory();
@@ -47,7 +47,7 @@ const Navbar = () =>{
           <li className="nav-item dropdown rounded-0">
               <Link className="nav-link dropdown-toggle" id="navbarDropdown" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-solid"></i></Link>
               <ul className="dropdown-menu rounded-0 dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <li><Link className="dropdown-item" to="">Paramètre</Link></li>
+                  <li><Link className="dropdown-item" to="/admin/profile">Profile</Link></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><button onClick={Logout} type="button" className="dropdown-item roboto-font">Déconnecter</button></li>
               </ul>

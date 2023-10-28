@@ -17,39 +17,36 @@ const Aside = () =>{
       <div className="sb-sidenav-menu">
         <div className="nav">
             <div className="sb-sidenav-menu-heading">Accueil</div>
-            <Link to="/admin/dashboard" className="nav-link roboto-font">
+            <Link to="/admin/tableau_de_bord" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
                 Tableau de bord
               </Link>
           </div>
           <div className="nav">
             <div className="sb-sidenav-menu-heading">Liste des Electeurs</div>
-              <Link to="/admin/membres" className="nav-link roboto-font">
+              <Link to="/admin/liste_des_electeurs_membres" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-solid fa-users-line"></i></div>
                 Membres
               </Link>
-              <Link to="/admin/liste-non-adhere" className="nav-link roboto-font">
+              <Link to="/admin/liste_des_electeurs_non_adheres" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-users"></i></div>
                 Non adhéré
               </Link>
-          </div>
-          <div className="nav">
-            <div className="sb-sidenav-menu-heading roboto-font">Votes</div>
-            <Link to="/admin/listes-electeurs-membres" className="nav-link roboto-font">
+             <Link to="/admin/liste_des_electeurs_votes" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-vote-yea"></i></div>
-                Electeurs
+                Votes
               </Link>
           </div>
           <div className="nav">
-            <div className="sb-sidenav-menu-heading">Statistiques</div>
-              <Link to="/admin/resultat" className="nav-link roboto-font">
+            <div className="sb-sidenav-menu-heading">Résultat</div>
+              <Link to="/admin/statistiques" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-chart-bar"></i></div>
-                Résultat
+                Statistiques
               </Link>
           </div>
            <div className="nav">
             <div className="sb-sidenav-menu-heading">Utilisateurs</div>
-              <Link to="/admin/liste_utilisateurs" className="nav-link roboto-font">
+              <Link to="/admin/liste_des_utilisateurs" className="nav-link roboto-font">
                 <div className="sb-nav-link-icon"><i className="fas fa-solid fa-users fa-solid"></i></div>
                 Utilisateurs
               </Link>

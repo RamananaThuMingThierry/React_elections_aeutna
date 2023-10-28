@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import axios from "axios";
+import Loading from "../constants/Loading";
 
-const Resultat = () =>{
+const Statistiques = () =>{
   
 const [loading, setLoading] = useState(true);
 const [membresAEUTNA, setMembresAEUTNA] = useState(0);
@@ -12,7 +13,7 @@ const [electeursVotes, setElecteursVotes] = useState(0);
 
 useEffect(() =>{
 
-  axios.get(`api/resultat`).then(res =>{
+  axios.get(`api/statistiques`).then(res =>{
     console.log(res.data.MembresAEUTNA);
       if(res.data.status === 200){
         setMembresAEUTNA(res.data.MembresAEUTNA);
@@ -25,13 +26,7 @@ useEffect(() =>{
 },[]);
 
 if(loading){
-  return (
-      <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
-          <div className="text-center">
-              <h2 className="text-muted roboto-font">Veuillez patienter s'il vous plaît...!</h2>        
-          </div>    
-      </div>
-  );
+  return <Loading/>
 }
 
 const data = [
@@ -116,4 +111,4 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
   );
 }
 
-export default Resultat;
+export default Statistiques;

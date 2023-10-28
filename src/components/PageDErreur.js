@@ -1,6 +1,6 @@
 import React from "react";
 
-function ErrorPage(){
+function PageDErreur(){
     return (
         <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
             <div className="text-center">
@@ -11,4 +11,4 @@ function ErrorPage(){
     );
 }
 
-export default ErrorPage;
+export default PageDErreur;

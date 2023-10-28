@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect, Route, useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import MasterLayout from "./layouts/back_end/MasterLayout";
+import Loading from "./components/back_end/constants/Loading";
 const AdminPrivateRoute = ({...rest}) =>{
 
     const [Authenticated, setAuthenticated] = useState(false);
@@ -47,14 +48,7 @@ const AdminPrivateRoute = ({...rest}) =>{
     });
 
     if(loading){
-        return (
-            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
-                <div className="text-center">
-                    <h1 className="roboto-font text-bold">Chargement</h1>
-                    <h3 className="text-muted roboto-font">Veuillez patienter s'il vous plaît!</h3>        
-                </div>    
-            </div>
-        );
+        return <Loading/>
     }
 
     return (

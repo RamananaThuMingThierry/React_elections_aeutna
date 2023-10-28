@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ReactPaginate from 'react-paginate';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
+import Loading from "../constants/Loading";
 
-const Liste_des_membres_electeurs = () =>{
+const Liste_des_electeurs_votes = () =>{
     
-    const [listesmembresElecteursList, setListesMembresElecteursList] = useState([]);
+    const [liste_des_electeurs, setliste_des_electeurs] = useState([]);
     const [loading, setLoading] = useState(true);
     
     const [searchInput, setSearch] = useState({
@@ -24,8 +25,8 @@ const Liste_des_membres_electeurs = () =>{
     const recordsPerPage = 10;
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
-    const records = listesmembresElecteursList.slice(firstIndex, lastIndex);
-    const npage = Math.ceil(listesmembresElecteursList.length / recordsPerPage);
+    const records = liste_des_electeurs.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(liste_des_electeurs.length / recordsPerPage);
     const numbers = [...Array(npage +1).keys()].slice(1);
     
     const  handlePageClick = (data) => {
@@ -34,9 +35,9 @@ const Liste_des_membres_electeurs = () =>{
 
     useEffect(() =>{
     
-        axios.get(`api/liste_des_electeurs`).then(res =>{
+        axios.get(`api/liste_des_electeurs_votes`).then(res =>{
             if(res.status === 200){
-                setListesMembresElecteursList(res.data.electeurs);   
+                setliste_des_electeurs(res.data.electeurs_votes);   
             }
              setLoading(false);
          });
@@ -44,32 +45,25 @@ const Liste_des_membres_electeurs = () =>{
      },[]);
 
     if(loading){
-        return (
-            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
-                <div className="text-center">
-                    <h1 className="roboto-font">Chargment...</h1>
-                    <h2 className="text-muted roboto-font">Liste des électeurs A.E.U.T.N.A</h2>        
-                </div>    
-            </div>
-        );
+      return <Loading/>
     }
 
 
-    const Refresh = (e) =>{
+    const Actualiser = (e) =>{
         e.preventDefault();
         
         searchInput.search = '';
         searchInput.select = '';
 
-        axios.get(`api/liste_des_electeurs`).then(res =>{
+        axios.get(`api/liste_des_electeurs_votes`).then(res =>{
             if(res.status === 200){
-                setListesMembresElecteursList(res.data.electeurs);   
+                setliste_des_electeurs(res.data.electeurs_votes);   
             }
          });
     }
 
     
-    const RechercheSubmit = (e) =>{
+    const RechercheElecteurVote = (e) =>{
         e.preventDefault();
 
         const data = {
@@ -82,11 +76,11 @@ const Liste_des_membres_electeurs = () =>{
         }else if(data.select == ''){
             swal("Warning", "Voulez-vous faire une recherche par quoi ?", "warning");
         }else{
-            axios.get(`api/recherche_membre_electeurs/${data.select}/${data.search}`).then(res =>{
+            axios.get(`api/recherche_un_electeur_vote/${data.select}/${data.search}`).then(res =>{
                 console.log(res.data);
                 if(res.data.status  === 200){
-                    console.log(res.data.recherche_membre_electeurs);
-                    setListesMembresElecteursList(res.data.recherche_membre_electeurs);
+                    console.log(res.data.recherche_un_electeur_vote);
+                    setliste_des_electeurs(res.data.recherche_un_electeur_vote);
                 }else if(res.data.status === 400){
                     swal("Info", res.data.message,"info");
                 }else if(res.data.status === 404){
@@ -97,7 +91,7 @@ const Liste_des_membres_electeurs = () =>{
     }
 
     return (
-        <div className="container-fluid">
+        <Fragment>
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
@@ -106,7 +100,7 @@ const Liste_des_membres_electeurs = () =>{
                             Liste des électeurs
                         </h2>
                         <div>
-                        <button onClick={Refresh} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 
+                        <button onClick={Actualiser} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 
                         </div>
                         </div>
                         </div>
@@ -115,7 +109,7 @@ const Liste_des_membres_electeurs = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-1 p-2 rounded-0">
-                       <form onSubmit={RechercheSubmit}>
+                       <form onSubmit={RechercheElecteurVote}>
                             <div className="input-group">
                                 <input type="search" name="search" className="form-control roboto-font rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
                                 <select class="form-select roboto-font" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
@@ -123,7 +117,6 @@ const Liste_des_membres_electeurs = () =>{
                                     <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
-                                    <option value="cin">C.I.N</option>
                                 </select>
                                 <button type="submit" className="btn btn-outline-primary roboto-font rounded-0">Recherche</button>
                             </div>
@@ -159,9 +152,9 @@ const Liste_des_membres_electeurs = () =>{
                                                 {
                                                     item.numero_carte == null 
                                                     ?
-                                                    <Link to={`show-electeur-non-adhere/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                    <Link to={`afficher_un_electeur_non_adhere_vote/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
                                                     :
-                                                    <Link to={`show-electeur/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                    <Link to={`afficher_un_electeur_membre_vote/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
                                                 }       
                                                 </td>
 
@@ -193,8 +186,8 @@ const Liste_des_membres_electeurs = () =>{
                     </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     );
 }
 
-export default Liste_des_membres_electeurs;
+export default Liste_des_electeurs_votes;

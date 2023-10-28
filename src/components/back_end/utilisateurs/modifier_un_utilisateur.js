@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import Loading from "./constants/Loading";
-import BASE_URL from "../../BasesUrl";
-const Profile = (props) =>{
+import BASE_URL from "../../../BasesUrl";
+import Loading from "../constants/Loading";
+const ModifierUnUtilisateur = (props) =>{
 
     const history = useHistory();
 
@@ -15,23 +15,27 @@ const Profile = (props) =>{
     const [userInput, setUser]= useState([]);
     const [image, setImages] = useState(null);
 
-    const fetchUserId = async () => {
-        try {
-            const response = await axios.get('/api/getUser');
-            if(response.data.status === 200){
-                setUser(response.data.user);
-                setLoading(false);
-            }else{
-                swal("Avertissement", response.data.message, "error");
-            }
-        } catch (error) {
-            console.error('Error fetching user ID:', error);
-        }
-      };
-
     useEffect(() =>{ 
-        fetchUserId(); 
-    },[]);
+        const id = props.match.params.id;
+        axios.get(`api/obtenir_un_utilisateur/${id}`).then(res =>{
+            if(res.data.status === 200){
+                setUser(res.data.user);
+                console.log(res.data.user);
+            }else if(res.data.status === 400){
+                swal("Error", res.data.message, "error");
+                history.push("/admin/dashboard");
+            }else if(res.data.status === 404){
+                swal("Avertissement", res.data.message, "warning");
+                history.push("/admin/liste_utilisateurs");
+            }else if(res.data.status === 500){
+                swal("Error", res.data.message, "error");
+                history.push("/admin/dashboard");
+            }
+            setLoading(false);
+        }) .catch(error => {
+            swal("Error", "Une erreur s'est produite lors de l'appel à l'API", "error");
+        });
+    },[props.match.params.id]);
 
     const handleInput = (e) =>{
         e.persist();
@@ -46,37 +50,10 @@ const Profile = (props) =>{
         setPicture(URL.createObjectURL(photo));
     }
 
-    const Logout = (e) =>{
-        const thisClicked = e.currentTarget;
-        swal({
-            title: "Vous êtes sûr?",
-            text: "Voulez-vous vraiment se déconnecter ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                axios.post(`api/logout`).then(res =>{
-                    if(res.data.status === 200){
-                        localStorage.removeItem('auth_token');
-                        localStorage.removeItem('auth_name');
-                        history.push('/');
-                        swal("Success", res.data.message, "success"); 
-                    }else if(res.data.status === 404){
-                        swal("Error", res.data.message, "error");
-                        thisClicked.innerHTML = "<i class=\"fas fa-save\"></i>";
-                    }
-                });
-            } else {
-                swal("La suppression a été annulé!");
-            }
-            });
-
-    }
-
-    const ModifierProfileSubmit = (e) =>{
+    const ModifierUnUtilisateurSubmit = (e) =>{
         e.preventDefault();
+
+        const id_user = props.match.params.id;
 
         const formData = new FormData();
         userInput.pseudo = userInput.pseudo ?? '';
@@ -87,23 +64,26 @@ const Profile = (props) =>{
         }else if(userInput.email == ''){
             swal("Avertissement", "Veuillez saisir votre adresse e-mail", "warning");
         }else{
-            formData.append('image', image ?? userInput.image);
+            formData.append('image', image);
             formData.append('pseudo',userInput.pseudo);
             formData.append('email', userInput.email);
             formData.append('roles', userInput.roles);
-            console.log(userInput.id);
 
-            axios.post(`api/modifier_profile/${userInput.id}`, formData).then(res =>{
+            console.log(formData);
+
+            axios.post(`api/modifier_un_utilisateur/${id_user}`, formData).then(res =>{
+                
                 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';   
-                console.log(res.data);
+                
                 if(res.data.status === 200){
                     swal("Success", res.data.message, "success");
-                    Logout(e);
+                    history.push('/admin/liste_des_utilisateurs');
                 }else if(res.data.status === 404){
                     swal("Warning", res.data.message, "warning");
                 }else if(res.data.status === 422){
                     swal("Warning", res.data.message, "warning");
                 }
+
             });
         }
     }
@@ -117,7 +97,7 @@ const Profile = (props) =>{
                 <div className="row">
                     <div className="col-md-8 offset-md-2">
                         <div className="card elevation-1 border-0 rounded-0 mt-2">
-                            <h2 className="text-center text-muted roboto-font my-3">Mon Profile</h2>
+                            <h2 className="text-center text-muted roboto-font my-3">Informations</h2>
                         </div>
                     </div>
                 </div>
@@ -125,19 +105,19 @@ const Profile = (props) =>{
                     <div className="col-md-8 offset-md-2">
                         <div className="card elevation-1 border-0 rounded-0 mt-1">
                             <div className="card-body">
-                                <form onSubmit={ModifierProfileSubmit} encType="multipart/form-data">
-                                    <div className="row">
-                                        <div className="col-md-4">
-                                                <div className="d-flex flex-column justify-content-center align-items-center">
-                                                    {
-                                                        picture.photo == '' ?
-                                                            <img className="mb-2 rounded-1" src={userInput.image != null ? `${BASE_URL}/${userInput.image}` :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="200px" width="189px" alt="Image"/>                                          
-                                                        :
-                                                    <img className="mb-2 rounded-1" src={picture.picture != picture ? picture :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="200px" width="189px" alt="Image"/>                                          
-                                                        }
-                                                    <input type="file" name="image" onChange={handleImage} className="form-control rounded-0 p-3"/>
-                                                </div>
+                            <form onSubmit={ModifierUnUtilisateurSubmit} encType="multipart/form-data">
+                                <div className="row">
+                                <div className="col-md-4">
+                                        <div className="d-flex flex-column justify-content-center align-items-center">
+                                            {
+                                                picture.photo == '' ?
+                                                    <img className="mb-2 rounded-1" src={userInput.image != null ? `${BASE_URL}/${userInput.image}` :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="200px" width="189px" alt="Image"/>                                          
+                                                :
+                                            <img className="mb-2 rounded-1" src={picture.picture != picture ? picture :  `${process.env.PUBLIC_URL}/images/photo.jpg`} height="200px" width="189px" alt="Image"/>                                          
+                                                }
+                                            <input type="file" name="image" onChange={handleImage} className="form-control rounded-0 p-3"/>
                                         </div>
+                                    </div>
                                         <div className="col-md-8">
                                             <div className="row">
                                                 <div className="col-md-12">
@@ -150,17 +130,21 @@ const Profile = (props) =>{
                                                 </div>
                                                 <div className="col-md-12">
                                                     <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font form-label" for="roles">Rôles</label>
-                                                    <input type="text" className="form-control robotot-font p-3 rounded-0" value={userInput.roles ==  0 ? 'Utilisateurs' : 'Administrateurs'}/>
+                                                    <select className="form-select rounded-0 p-3" name="roles" id="roles" value={userInput.roles == 0 ? 0 : 1} onChange={handleInput}>
+                                                    <option value="" selected>Ouvre ce menu de séléction</option>
+                                                    <option value="0">Utilisateurs</option>
+                                                    <option value="1">Administrateurs</option>
+                                                </select>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr className="mt-4"/>
+                                    <hr/>
                                     <div className="row">
-                                        <div className="col-md-4 mt-2 offset-md-4">
-                                            <Link to="/admin/liste_des_utilisateurs" className="btn btn-danger p-3 rounded-0 w-100 roboto-font">Retour</Link>
+                                        <div className="col-md-4 offset-md-4">
+                                            <Link to="/admin/liste_des_utilisateurs" className="btn btn-danger p-3 rounded-0 w-100 roboto-font">Annuler</Link>
                                         </div>
-                                        <div className="col-md-4 mt-2">
+                                        <div className="col-md-4">
                                             <button type="submit" className="btn btn-info p-3 text-white rounded-0 w-100 roboto-font">Valider</button>
                                         </div>
                                     </div> 
@@ -174,4 +158,4 @@ const Profile = (props) =>{
 
 }
 
-export default Profile;
+export default ModifierUnUtilisateur;

@@ -13,10 +13,10 @@ class FrontendLayout extends Component{
                     <Route  path="/403" component={Page403}/>
                     <Route  path="/404" component={Page404}/>
                     <Route exact path="/register" name="Register">
-                        { localStorage.getItem('auth_token') ? <Redirect to="/admin/dashboard" /> : <Register/>}
+                        { localStorage.getItem('auth_token') ? <Redirect to="/admin/tableau_de_bord" /> : <Register/>}
                     </Route>
                     <Route  path="/" name="Login">
-                        { localStorage.getItem('auth_token') ? <Redirect to="/admin/dashboard" /> : <Login/>}
+                        { localStorage.getItem('auth_token') ? <Redirect to="/admin/tableau_de_bord" /> : <Login/>}
                     </Route>
                 </Switch>
             </>

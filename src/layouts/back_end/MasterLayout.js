@@ -1,26 +1,49 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Dashboard from "../../components/back_end/Dashboard";
-import Profile from "../../components/back_end/Profile";
-import Membres_electeurs from "../../components/back_end/electeurs/membres";
-import AddMembres from "../../components/back_end/electeurs/add_membres";
-import ShowMembres from "../../components/back_end/electeurs/show_membres";
+/*------------------------ Layouts --------------------------*/
 import Navbar from "./Navbar";
 import Aside from "./Aside";
 import Footer from "./Footer";
-import Liste_des_membres_electeurs from "../../components/back_end/electeurs/liste_des_electeurs";
-import ApprouveMembres from "../../components/back_end/electeurs/approuve_membres";
-import ErrorPage from '../../components/ErrorPage';
+
+/*------------------------- Style ---------------------------*/
 import '../../assets/back_end/css/styles.css';
 import '../../assets/back_end/js/scripts';
-import EditMembres from "../../components/back_end/electeurs/edit_membres";
-import ShowElecteurs from "../../components/back_end/electeurs/show_electeurs";
-import Non_adhere from "../../components/back_end/electeurs/non_adhere";
-import AddElecteurNonAdhere from "../../components/back_end/electeurs/add_electeur_non_adhere";
-import ShowElecteurNonAdhere from "../../components/back_end/electeurs/show_electeur_non_adhere";
-import EditElecteurNonAdhere from "../../components/back_end/electeurs/edit_electeur_non_adhere";
-import Resultat from "../../components/back_end/statistiques/resultat";
-import Liste_des_Utilisateurs from "../../components/back_end/users/Liste_des_Utilisateurs";
+
+/*-------------------------- Utilisateurs ---------------------*/
+import Liste_des_Utilisateurs from "../../components/back_end/utilisateurs/liste_des_Utilisateurs";
+import ModifierUnUtilisateur from "../../components/back_end/utilisateurs/modifier_un_utilisateur";
+import AfficherUnUtilisateur from "../../components/back_end/utilisateurs/afficher_un_utilisateur";
+
+/*----------------------- Tableau de bord --------------------*/
+import TableauDeBoard from "../../components/back_end/TableauDeBoard";
+
+/*------------------------- Profile --------------------------*/
+import Profile from "../../components/back_end/Profile";
+
+/*------------------------ Page d'Erreur ---------------------*/
+import PageDErreur from "../../components/PageDErreur";
+
+/*-------------------------- Electeurs Non Adherés -----------------------*/
+import AjouterElecteurNonAdhere from "../../components/back_end/electeurs_non_adheres/ajouter_electeur_non_adhere";
+import ListeDesElecteursNonAdheres from "../../components/back_end/electeurs_non_adheres/liste_des_electeurs_non_adhere";
+import ModifierUnElecteurNonAdhere from "../../components/back_end/electeurs_non_adheres/modifier_un_electeur_non_adhere";
+import AfficherUnElecteurNonAdhere from "../../components/back_end/electeurs_non_adheres/afficher_un_electeur_non_adhere";
+
+/*--------------------------- Electeurs Votes --------------------------*/
+import Liste_des_electeurs_votes from "../../components/back_end/electeurs_votes/liste_des_electeurs_votes";
+import AfficherUnElecteurMembreVote from "../../components/back_end/electeurs_votes/afficher_un_electeur_membre_vote";
+import AfficherUnElecteurNonAdhereVote from "../../components/back_end/electeurs_votes/afficher_un_electeur_non_adhere_vote";
+
+/*------------------------------------ Electeurs Membres --------------------------*/
+import AjouterUnElecteurMembre from "../../components/back_end/electeurs_membres/ajouter_un_electeur_membre";
+import AfficherUnElecteurMembre from "../../components/back_end/electeurs_membres/afficher_un_electeur_membre";
+import ListeDesElecteursMembres from "../../components/back_end/electeurs_membres/liste_des_electeurs_membres";
+import ModifierUnElecteurMembre from "../../components/back_end/electeurs_membres/modifier_un_electeur_membre";
+import ApprouveUnElecteurMembre from "../../components/back_end/electeurs_membres/approuve_un_electeur_membre";
+
+/*-------------------------------- Statistiques --------------------------------*/
+import Statistiques from "../../components/back_end/resultats/statistiques";
+
 
 class MasterLayout extends Component{
     render(){
@@ -35,29 +58,38 @@ class MasterLayout extends Component{
                         <main>
                             <div class="container-fluid">
                                 <Switch>
-                                    <Route exact path="/admin/dashboard" component={Dashboard} />
+                                    <Route exact path="/admin/tableau_de_bord" component={TableauDeBoard} />
                                     <Route exact path="/admin/profile" component={Profile} />
-                                    {/* Membres */}
-                                    <Route exact path="/admin/membres" component={Membres_electeurs} />
-                                    {/* liste des électeurs */}
-                                    <Route exact path="/admin/listes-electeurs-membres" component={Liste_des_membres_electeurs} />
-                                    {/* liste membres non adhéré */}
-                                    <Route exact path="/admin/liste-non-adhere" component={Non_adhere} />
+                                    
+                                    {/*--------------------------------- Membres AEUTNA ------------------------------------*/}
+                                    <Route exact path="/admin/ajouter_un_electeur_membre" component={AjouterUnElecteurMembre} />
+                                    <Route exact path="/admin/liste_des_electeurs_membres" component={ListeDesElecteursMembres} />
+                                    <Route exact path="/admin/modifier_un_electeur_membre/:id" component={ModifierUnElecteurMembre} />
+                                    <Route exact path="/admin/afficher_un_electeur_membre/:id" component={AfficherUnElecteurMembre} />
+                                    <Route exact path="/admin/approuve_un_electeur_membre/:id" component={ApprouveUnElecteurMembre} />
+                                    
+                                    {/* Non adhéré */}
+                                    <Route exact path="/admin/ajouter_un_electeur_non_adhere" component={AjouterElecteurNonAdhere} />
+                                    <Route exact path="/admin/liste_des_electeurs_non_adheres" component={ListeDesElecteursNonAdheres} />
+                                    <Route exact path="/admin/modifier_un_electeur_non_adhere/:id" component={ModifierUnElecteurNonAdhere} />
+                                    <Route exact path="/admin/afficher_electeur_non_adhere/:id" component={AfficherUnElecteurNonAdhere} /> 
+                                    
+                                    {/*-------------------------------- liste des électeurs votes ----------------------------------*/}
+                                    <Route exact path="/admin/liste_des_electeurs_votes" component={Liste_des_electeurs_votes} />
+                                    <Route exact path="/admin/afficher_un_electeur_membre_vote/:id" component={AfficherUnElecteurMembreVote} />
+                                    <Route exact path="/admin/afficher_un_electeur_non_adhere_vote/:id" component={AfficherUnElecteurNonAdhereVote} />
+                                    
                                     {/* Liste des utilisateurs */}
-                                    <Route exact path="/admin/liste_utilisateurs" component={Liste_des_Utilisateurs} />
-                                    {/* Approuve membres AEUTNA */}
-                                    <Route exact path="/admin/approuve-membres/:id" component={ApprouveMembres} />
-                                    <Route exact path="/admin/add-membres" component={AddMembres} />
-                                    <Route exact path="/admin/add-nouveau-bachelier" component={AddElecteurNonAdhere} />
-                                    <Route exact path="/admin/show-membre/:id" component={ShowMembres} />
-                                    <Route exact path="/admin/show-electeur/:id" component={ShowElecteurs} />
-                                    <Route exact path="/admin/show-electeur-non-adhere/:id" component={ShowElecteurNonAdhere} />
-                                    <Route exact path="/admin/edit-membres/:id" component={EditMembres} />
-                                    <Route exact path="/admin/edit-electeur-non-adhere/:id" component={EditElecteurNonAdhere} />
-                                    <Route exact path="/admin/resultat" component={Resultat} />
+                                    <Route exact path="/admin/liste_des_utilisateurs" component={Liste_des_Utilisateurs} />
+                                    <Route exact path="/admin/modifier_un_utilisateur/:id" component={ModifierUnUtilisateur} />
+                                    <Route exact path="/admin/afficher_un_utilisateur/:id" component={AfficherUnUtilisateur} />
+                                    
 
-                                    {/* Page d'erreurs */}
-                                    <Route component={ErrorPage}/>
+                                    {/* --------------------------------- Statistiques ---------------------------------------- */}
+                                    <Route exact path="/admin/statistiques" component={Statistiques} />
+
+                                    {/* --------------------------------- Page d'erreurs ----------------------------------------*/}
+                                    <Route component={PageDErreur}/>
                                 </Switch>
                             </div>
                         </main>

@@ -5,8 +5,8 @@ import ReactPaginate from 'react-paginate';
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
-
-const Membres_electeurs = () =>{
+import Loading from "../constants/Loading";
+const ListeDesElecteursMembres = () =>{
     
     const [loading, setLoading] = useState(true);
     
@@ -20,56 +20,64 @@ const Membres_electeurs = () =>{
         setSearch({...searchInput, [e.target.name]: e.target.value});
     }
 
-    const [membresElecteursList, setMembresElecteursList] = useState([]);
+    const [listes_des_electeurs_membres, setlistes_des_electeurs_membres] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 10;
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
-    const records = membresElecteursList.slice(firstIndex, lastIndex);
-    const npage = Math.ceil(membresElecteursList.length / recordsPerPage);
+    const records = listes_des_electeurs_membres.slice(firstIndex, lastIndex);
+    const npage = Math.ceil(listes_des_electeurs_membres.length / recordsPerPage);
     const numbers = [...Array(npage +1).keys()].slice(1);
     
+    const [user, setUser] = useState([]);
+
     const  handlePageClick = (data) => {
         setCurrentPage(data.selected + 1);
     }
 
-    useEffect(() =>{
+    const fetchUserId = async () => {
+        try {
+            const response = await axios.get('/api/getUser');
+            if(response.data.status === 200){
+                setUser(response.data.user);
+                setLoading(false);
+            }else{
+                swal("Avertissement", response.data.message, "error");
+            }
+        } catch (error) {
+            console.error('Error fetching user ID:', error);
+        }
+      };
 
-        axios.get(`api/membres`).then(res =>{
+    useEffect(() =>{
+        axios.get(`api/liste_des_electeurs_membres`).then(res =>{
             if(res.status === 200){
-                setMembresElecteursList(res.data.electeurs_membres);   
+                setlistes_des_electeurs_membres(res.data.liste_des_electeurs_membres);   
                 }
-             setLoading(false);
          });
+        fetchUserId();
      },[]);
 
     if(loading){
-        return (
-            <div className="container-fluid bg-white mt-2 d-flex justify-content-center align-items-center" style={{height: '85vh'}}>
-                <div className="text-center">
-                    <h1 className="roboto-font">Chargment...</h1>
-                    <h2 className="text-muted roboto-font">Listes membres A.E.U.T.N.A</h2>        
-                </div>    
-            </div>
-        );
+       return <Loading/>
     }
 
 
-    const Refresh = (e) =>{
+    const Acutaliser = (e) =>{
         e.preventDefault();
         
         searchInput.search = '';
         searchInput.select = '';
 
-        axios.get(`api/membres`).then(res =>{
+        axios.get(`api/liste_des_electeurs_membres`).then(res =>{
             if(res.status === 200){
-                setMembresElecteursList(res.data.electeurs_membres);   
+                setlistes_des_electeurs_membres(res.data.liste_des_electeurs_membres);   
             }
          });
     }
 
     
-    const RechercheSubmit = (e) =>{
+    const RechercheElecteursMembresSubmit = (e) =>{
         e.preventDefault();
 
         const data = {
@@ -82,11 +90,11 @@ const Membres_electeurs = () =>{
         }else if(data.select == ''){
             swal("Warning", "Voulez-vous faire une recherche par quoi ?", "warning");
         }else{
-            axios.get(`api/recherche_membres/${data.select}/${data.search}`).then(res =>{
+            axios.get(`api/recherche_un_electeur_membre/${data.select}/${data.search}`).then(res =>{
                 console.log(res.data);
                 if(res.data.status  === 200){
-                    console.log(res.data.recherche_membres);
-                    setMembresElecteursList(res.data.recherche_membres);
+                    console.log(res.data.recherche_un_electeur_membre);
+                    setlistes_des_electeurs_membres(res.data.recherche_un_electeur_membre);
                 }else if(res.data.status === 400){
                     swal("Info", res.data.message,"info");
                 }else if(res.data.status === 404){
@@ -96,7 +104,7 @@ const Membres_electeurs = () =>{
         }
     }
 
-    const deleteElecteursMembres = (e, id) =>{
+    const SupprimerUnElecteurMembre = (e, id) =>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Suppression";
 
@@ -112,7 +120,7 @@ const Membres_electeurs = () =>{
                 axios.post(`api/delete-electeur/${id}`).then(res =>{
                     if(res.data.status === 200){
                         swal("Success", res.data.message, "success");
-                        Refresh(e); 
+                        Acutaliser(e); 
                     }else if(res.data.status === 404){
                         swal("Error", res.data.message, "error");
                         thisClicked.innerHTML = "<i class=\"fas fa-trash\"></i>";
@@ -132,11 +140,11 @@ const Membres_electeurs = () =>{
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between">
                         <h3 className="roboto-font text-muted mt-2">
-                            Liste des membres A.E.U.T.N.A
+                            Liste des élécteurs membres A.E.U.T.N.A
                         </h3>
                         <div className="group-bnt mt-1">
-                            <button onClick={Refresh} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
-                            <Link to="/admin/add-membres" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
+                            <button onClick={Acutaliser} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
+                            <Link to="/admin/ajouter_un_electeur_membre" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
                         </div>
                         </div>
                         </div>
@@ -145,7 +153,7 @@ const Membres_electeurs = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-1 p-2 rounded-0">
-                       <form onSubmit={RechercheSubmit}>
+                       <form onSubmit={RechercheElecteursMembresSubmit}>
                             <div className="input-group">
                                 <input type="search" name="search" className="roboto-font form-control rounded-0" placeholder="Recherche" value={searchInput.search} onChange={handleInput} aria-label="Search" aria-describedby="search-addon" />
                                 <select className="form-select roboto-font" name="select" value={searchInput.select} onChange={handleInput} aria-label="Default select example">
@@ -171,6 +179,7 @@ const Membres_electeurs = () =>{
                                     <th className="roboto-font">Numéro carte</th>
                                     <th className="roboto-font">Noms</th>
                                     <th className="roboto-font">Prénoms</th>
+                                    <th className="roboto-font">C.I.N</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -182,12 +191,22 @@ const Membres_electeurs = () =>{
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
                                                 <td className="roboto-font">{item.nom}</td>
-                                                <td className="roboto-font">{item.prenom}</td>
+                                                <td className="roboto-font">{item.prenom ?? '-'}</td>
+                                                <td className="roboto-font">{item.cin ?? '-'}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
-                                                    <Link to={`show-membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
-                                                    <Link to={`edit-membres/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
-                                                    <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => deleteElecteursMembres(e, item.id)}><i className="fas fa-trash"></i></button>
+                                                   
+                                                    {
+                                                        user.roles == 0
+                                                        ?
+                                                        <Link to={`afficher_un_electeur_membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                        :
+                                                        <>
+                                                         <Link to={`afficher_un_electeur_membre/${item.id}`} className="btn btn-warning btn-md ml-2 rounded-0"><i className="fas fa-eye"></i></Link>
+                                                            <Link to={`modifier_un_electeur_membre/${item.id}`} className="btn btn-primary btn-md ml-2"><i className="fa fa-edit"></i></Link>
+                                                            <button className="rounded-0 btn btn-danger btn-md d-inline" onClick={(e) => SupprimerUnElecteurMembre(e, item.id)}><i className="fas fa-trash"></i></button>
+                                                        </>
+                                                    }
                                                     </div>
                                                 </td>
 
@@ -222,4 +241,4 @@ const Membres_electeurs = () =>{
         </Fragment>
     );
 }
-export default Membres_electeurs;
+export default ListeDesElecteursMembres;

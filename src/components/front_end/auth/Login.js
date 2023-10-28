@@ -37,7 +37,7 @@ const Login = () =>{
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.pseudo);
                     swal("Success", res.data.message,"success");
-                    history.push("/admin/dashboard");
+                    history.push("/admin/tableau_de_bord");
                 }else if(res.data.status === 401){
                     swal("Warning", res.data.message,"warning");
                 }
@@ -84,7 +84,7 @@ const Login = () =>{
                             </div>
 
                             <div className="pt-1 mb-4 d-flex justify-content-center">
-                            <button className="btn btn-dark btn-lg btn-block w-50 rounded-0 roboto-font" type="submit">Se connecter</button>
+                            <button className="btn btn-dark btn-lg btn-block w-50 rounded-0 roboto-font" style={{fontSize:'15px'}} type="submit">Se connecter</button>
                             </div>
                             <p className="mb-5 text-center roboto-font pb-lg-2" style={{color:'#393f81'}}>Vous n'avez pas de compte? <Link type="#" to="/register"
                                 style={{color:'#393f81'}}>S'inscrire</Link></p>
