@@ -140,7 +140,7 @@ const Liste_des_Utilisateurs = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
-                        <div className="d-flex justify-content-between">
+                        <div className="d-flex justify-content-between align-items-center">
                         <h3 className="roboto-font text-muted mt-2">
                             Liste des utilisateurs
                         </h3>
@@ -213,14 +213,14 @@ const Liste_des_Utilisateurs = () =>{
                         </table>
                     </div>
                     <ReactPaginate 
-                            previousLabel={'Précédent'}
-                            nextLabel={'Suivant'}
+                            previousLabel={'<<'}
+                            nextLabel={'>>'}
                             breakLabel={'...'}
                             pageCount={numbers.length}
-                            marginPagesDisplayed={3}
-                            pageRangeDisplayed={6}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={1}
                             onPageChange={handlePageClick}
-                            containerClassName={'pagination justify-content-center'}
+                            containerClassName={'pagination mt-4 justify-content-center'}
                             pageClassName={'page-item roboto-font'}
                             pageLinkClassName={'page-link rounded-0'}
                             previousClassName={'page-item roboto-font'}

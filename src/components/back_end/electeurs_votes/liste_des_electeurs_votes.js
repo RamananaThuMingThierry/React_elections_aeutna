@@ -95,15 +95,15 @@ const Liste_des_electeurs_votes = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
-                        <div className="d-flex text-muted roboto-font justify-content-between">
-                        <h2>
-                            Liste des électeurs
-                        </h2>
-                        <div>
-                        <button onClick={Actualiser} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 
+                        <div className="d-flex align-items-center justify-content-between">
+                            <h2 className="text-muted roboto-font mt-2 text-center">
+                                Liste des électeurs
+                            </h2>
+                            <div className="d-flex justify-content align-items-center">
+                                <button onClick={Actualiser} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 
+                            </div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div className="row">
@@ -132,7 +132,8 @@ const Liste_des_electeurs_votes = () =>{
                                 <tr>
                                     <th className="roboto-font">Photos</th>
                                     <th className="roboto-font">Numéro carte</th>
-                                    <th className="roboto-font">Noms et Prénoms</th>
+                                    <th className="roboto-font">Noms</th>
+                                    <th className="roboto-font">Prénoms</th>
                                     <th className="roboto-font">Votes</th>
                                     <th className="roboto-font">Secteurs</th>
                                     <th className="roboto-font text-center">Actions</th>
@@ -145,7 +146,8 @@ const Liste_des_electeurs_votes = () =>{
                                             <tr key={item.id}>
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
-                                                <td className="roboto-font">{`${item.nom} ${item.prenom}`}</td>
+                                                <td className="roboto-font">${item.nom}</td>
+                                                <td className="roboto-font">${item.prenom}</td>
                                                 <td className="roboto-font">{item.votes == 'cin' ? 'C.I.N' : item.votes == 'Convocation' ? item.votes : 'Carte A.E.U.T.N.A'}</td>
                                                 <td className="roboto-font">{item.secteurs}</td>
                                                 <td className="text-center">
@@ -164,26 +166,26 @@ const Liste_des_electeurs_votes = () =>{
                                 }
                             </tbody>
                         </table>
-                            <ReactPaginate 
-                            previousLabel={'Précédent'}
-                            nextLabel={'Suivant'}
-                            breakLabel={'...'}
-                            pageCount={numbers.length}
-                            marginPagesDisplayed={3}
-                            pageRangeDisplayed={6}
-                            onPageChange={handlePageClick}
-                            containerClassName={'pagination justify-content-center'}
-                            pageClassName={'page-item roboto-font'}
-                            pageLinkClassName={'page-link rounded-0'}
-                            previousClassName={'page-item roboto-font'}
-                            previousLinkClassName={'page-link rounded-0'}
-                            nextClassName={'page-item roboto-font'}
-                            nextLinkClassName={'page-link rounded-0'}
-                            breakClassName={'page-item roboto-font'}
-                            breakLinkClassName={'page-link rounded-0'}
-                            activeClassName={'active'}
-                        />
-                    </div>
+                        </div>
+                        <ReactPaginate 
+                        previousLabel={'<<'}
+                        nextLabel={'>>'}
+                        breakLabel={'...'}
+                        pageCount={numbers.length}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={1}
+                        onPageChange={handlePageClick}
+                        containerClassName={'pagination mt-4 justify-content-center'}
+                        pageClassName={'page-item roboto-font'}
+                        pageLinkClassName={'page-link rounded-0'}
+                        previousClassName={'page-item roboto-font'}
+                        previousLinkClassName={'page-link rounded-0'}
+                        nextClassName={'page-item roboto-font'}
+                        nextLinkClassName={'page-link rounded-0'}
+                        breakClassName={'page-item roboto-font'}
+                        breakLinkClassName={'page-link rounded-0'}
+                        activeClassName={'active'}
+                    />
                 </div>
             </div>
         </Fragment>

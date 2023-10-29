@@ -1,20 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
 
 const Aside = () =>{
 
   const toggleBodyClass = (e) => {
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
-     e.preventDefault();
-    document.body.classList.toggle('sb-sidenav-toggled');
-    localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+      e.preventDefault();
+       document.body.classList.toggle('sb-sidenav-toggled');
+      localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
     }
-};
+  };
 
    return (
     <nav className="sb-sidenav accordion elevation-2 sb-sidenav-dark" id="sidenavAccordion">
-      <div className="sb-sidenav-menu">
+      <div className="sb-sidenav-menu" onClick={toggleBodyClass}>
         <div className="nav">
             <div className="sb-sidenav-menu-heading">Accueil</div>
             <Link to="/admin/tableau_de_bord" className="nav-link roboto-font">

@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
 import Loading from "../constants/Loading";
 const ListeDesElecteursMembres = () =>{
-    
+
     const [loading, setLoading] = useState(true);
     
     const [searchInput, setSearch] = useState({
@@ -138,16 +138,17 @@ const ListeDesElecteursMembres = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
-                        <div className="d-flex justify-content-between">
-                        <h3 className="roboto-font text-muted mt-2">
-                            Liste des élécteurs membres A.E.U.T.N.A
-                        </h3>
-                        <div className="group-bnt mt-1">
-                            <button onClick={Acutaliser} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
-                            <Link to="/admin/ajouter_un_electeur_membre" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
+                        <div className="d-flex justify-content-between align-items-center">
+                            <h3 className="roboto-font text-muted text-center mt-2">
+                                Liste des élécteurs membres A.E.U.T.N.A
+                            </h3>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <button onClick={Acutaliser} className="btn rounded-0 btn-primary btn-md mt-1"><i className="fas fa-refresh"></i></button>
+                                <span>&nbsp;</span>
+                                <Link to="/admin/ajouter_un_electeur_membre" type="button" className="btn rounded-0 mt-1 btn-success"><i className="fas fa-user-plus"></i></Link>    
+                            </div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div className="row">
@@ -161,7 +162,6 @@ const ListeDesElecteursMembres = () =>{
                                     <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
-                                    <option value="cin">C.I.N</option>
                                 </select>
                                 <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherce</button>
                             </div>
@@ -216,15 +216,16 @@ const ListeDesElecteursMembres = () =>{
                                 }
                             </tbody>
                         </table>
-                            <ReactPaginate 
-                            previousLabel={'Précédent'}
-                            nextLabel={'Suivant'}
+                    </div>
+                    <ReactPaginate 
+                            previousLabel={'<<'}
+                            nextLabel={'>>'}
                             breakLabel={'...'}
                             pageCount={numbers.length}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={1}
                             onPageChange={handlePageClick}
-                            containerClassName={'pagination justify-content-center'}
+                            containerClassName={'pagination mt-4 justify-content-center'}
                             pageClassName={'page-item roboto-font'}
                             pageLinkClassName={'page-link rounded-0'}
                             previousClassName={'page-item roboto-font'}
@@ -235,7 +236,6 @@ const ListeDesElecteursMembres = () =>{
                             breakLinkClassName={'page-link rounded-0'}
                             activeClassName={'active'}
                         />
-                    </div>
                 </div>
             </div>
         </Fragment>

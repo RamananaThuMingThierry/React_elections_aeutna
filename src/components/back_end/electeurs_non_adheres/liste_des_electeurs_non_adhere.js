@@ -138,12 +138,13 @@ const ListeDesElecteursNonAdheres = () =>{
             <div className="row">
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
-                        <div className="d-flex justify-content-between">
-                        <h2 className="roboto-font text-muted">
+                        <div className="d-flex justify-content-between align-items-center">
+                        <h2 className="roboto-font text-muted text-center">
                             Liste des électeurs non adhérés
                         </h2>
-                        <div className="group-btn mt-1">
-                            <button onClick={Actualiser} className="btn ml-2 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <button onClick={Actualiser} className="btn btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
+                            <span>&nbsp;</span>
                             <Link to="/admin/ajouter_un_electeur_non_adhere" className="rounded-0 btn btn-success btn-md"><i className="fas fa-user-plus"></i></Link>    
                         </div>
                         </div>
@@ -160,7 +161,6 @@ const ListeDesElecteursNonAdheres = () =>{
                                     <option value="" selected>Ouvre ce menu de séléction</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
-                                    <option value="cin">C.I.N</option>
                                 </select>
                                 <button type="submit" className="btn roboto-font btn-outline-primary rounded-0">Recherche</button>
                             </div>
@@ -176,7 +176,6 @@ const ListeDesElecteursNonAdheres = () =>{
                                 <tr>
                                     <th className="roboto-font">Noms</th>
                                     <th className="roboto-font">Prénoms</th>
-                                    <th className="roboto-font">C.I.N</th>
                                     <th className="roboto-font">Secteurs</th>
                                     <th className="roboto-font">Votes</th>
                                     <th className="text-center roboto-font">Actions</th>
@@ -189,7 +188,6 @@ const ListeDesElecteursNonAdheres = () =>{
                                             <tr key={item.id}>
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom}</td>
-                                                <td className="roboto-font">{item.cin ?? '-'}</td>
                                                 <td className="roboto-font">{item.secteurs}</td>
                                                 <td className="roboto-font">{item.votes}</td>
                                                 <td className="text-center">
@@ -215,14 +213,14 @@ const ListeDesElecteursNonAdheres = () =>{
                             </tbody>
                         </table>
                             <ReactPaginate 
-                            previousLabel={'Précédent'}
-                            nextLabel={'Suivant'}
+                            previousLabel={'<<'}
+                            nextLabel={'>>'}
                             breakLabel={'...'}
                             pageCount={numbers.length}
                             marginPagesDisplayed={3}
                             pageRangeDisplayed={6}
                             onPageChange={handlePageClick}
-                            containerClassName={'pagination justify-content-center'}
+                            containerClassName={'pagination mt-4 justify-content-center'}
                             pageClassName={'page-item roboto-font'}
                             pageLinkClassName={'page-link rounded-0'}
                             previousClassName={'page-item roboto-font'}
