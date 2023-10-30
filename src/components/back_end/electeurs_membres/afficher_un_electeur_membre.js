@@ -58,7 +58,7 @@ const AfficherUnElecteurMembre = (props) =>{
                                             </div>
                                             <div className="col-md-6">
                                                 <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Sexe</label>
-                                                <input className="form-control p-3 rounded-0 roboto-font" disabled value={afficherUnElecteurMembre.sexe ?? 'Masculin'} style={{backgroundColor:'white'}}/>
+                                                <input className="form-control p-3 rounded-0 roboto-font" disabled value={afficherUnElecteurMembre.sexe == 'feminin' ? 'Féminin' : 'Masculin'} style={{backgroundColor:'white'}}/>
                                             </div>
                                         </div>
                                         <div className="row">

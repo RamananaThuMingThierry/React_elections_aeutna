@@ -19,6 +19,8 @@ import TableauDeBoard from "../../components/back_end/TableauDeBoard";
 
 /*------------------------- Profile --------------------------*/
 import Profile from "../../components/back_end/Profile";
+import ModifierMotDePasse from "../../components/back_end/auths/modifier_mot_de_passe";
+
 
 /*------------------------ Page d'Erreur ---------------------*/
 import PageDErreur from "../../components/PageDErreur";
@@ -60,6 +62,7 @@ class MasterLayout extends Component{
                                 <Switch>
                                     <Route exact path="/admin/tableau_de_bord" component={TableauDeBoard} />
                                     <Route exact path="/admin/profile" component={Profile} />
+                                    <Route exact path="/admin/modifier_mot_de_passe" component={ModifierMotDePasse} />
                                     
                                     {/*--------------------------------- Membres AEUTNA ------------------------------------*/}
                                     <Route exact path="/admin/ajouter_un_electeur_membre" component={AjouterUnElecteurMembre} />
