@@ -45,6 +45,7 @@ import ApprouveUnElecteurMembre from "../../components/back_end/electeurs_membre
 
 /*-------------------------------- Statistiques --------------------------------*/
 import Statistiques from "../../components/back_end/resultats/statistiques";
+import Export_liste_des_electeurs from "../../components/back_end/electeurs_membres/export_liste_des_electeurs";
 
 
 class MasterLayout extends Component{
@@ -66,6 +67,7 @@ class MasterLayout extends Component{
                                     
                                     {/*--------------------------------- Membres AEUTNA ------------------------------------*/}
                                     <Route exact path="/admin/ajouter_un_electeur_membre" component={AjouterUnElecteurMembre} />
+                                    <Route exact path="/admin/export_liste_des_electeurs" component={Export_liste_des_electeurs} />
                                     <Route exact path="/admin/liste_des_electeurs_membres" component={ListeDesElecteursMembres} />
                                     <Route exact path="/admin/modifier_un_electeur_membre/:id" component={ModifierUnElecteurMembre} />
                                     <Route exact path="/admin/afficher_un_electeur_membre/:id" component={AfficherUnElecteurMembre} />

@@ -36,7 +36,7 @@ const Login = () =>{
                 if(res.data.status  === 200){
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.pseudo);
-                    swal("Success", res.data.message,"success");
+                    swal("Réussi", res.data.message,"success");
                     history.push("/admin/tableau_de_bord");
                 }else if(res.data.status === 401){
                     swal("Warning", res.data.message,"warning");

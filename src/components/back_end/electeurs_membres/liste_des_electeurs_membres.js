@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
 import Loading from "../constants/Loading";
-const ListeDesElecteursMembres = () =>{
 
+const ListeDesElecteursMembres = () =>{
     const [loading, setLoading] = useState(true);
     
     const [searchInput, setSearch] = useState({
@@ -76,6 +76,29 @@ const ListeDesElecteursMembres = () =>{
          });
     }
 
+    // const exportToPDF = () => {
+    //     axios.get(`api/export_liste_des_electeurs_membres`)
+    //         .then(response => {
+    //             const blob = new Blob([response.data], { type: 'application/pdf' });
+    //             const url = window.URL.createObjectURL(blob);
+    
+    //             // Crée un lien invisible pour le téléchargement
+    //             const a = document.createElement('a');
+    //             a.style.display = 'none';
+    //             a.href = url;
+    //             a.download = 'liste_noms_prenoms.pdf';
+    //             document.body.appendChild(a);
+    
+    //             // Cliquez sur le lien pour ouvrir la fenêtre de téléchargement
+    //             a.click();
+    
+    //             // Libère les ressources
+    //             window.URL.revokeObjectURL(url);
+    //         })
+    //         .catch(error => {
+    //             swal("Erreur", "Erreur d'exporation des données !", "error");
+    //         });
+    // };
     
     const RechercheElecteursMembresSubmit = (e) =>{
         e.preventDefault();
@@ -88,7 +111,7 @@ const ListeDesElecteursMembres = () =>{
         if(data.search == ''){
             swal("Warning", "Veuillez entrer la valuer à recherche !", "warning");
         }else if(data.select == ''){
-            swal("Warning", "Voulez-vous faire une recherche par quoi ?", "warning");
+            swal("Avertissement", "Voulez-vous faire une recherche par quoi ?", "warning");
         }else{
             axios.get(`api/recherche_un_electeur_membre/${data.select}/${data.search}`).then(res =>{
                 console.log(res.data);
@@ -98,7 +121,7 @@ const ListeDesElecteursMembres = () =>{
                 }else if(res.data.status === 400){
                     swal("Info", res.data.message,"info");
                 }else if(res.data.status === 404){
-                    swal("Warning", res.data.message,"warning");
+                    swal("Avertissement", res.data.message,"warning");
                 }
             });
         }
@@ -143,6 +166,9 @@ const ListeDesElecteursMembres = () =>{
                                 Liste des élécteurs membres A.E.U.T.N.A
                             </h3>
                             <div className="d-flex justify-content-between align-items-center">
+                                {/* <Link to="/admin/export_liste_des_electeurs" type="button" className="btn rounded-0 mt-1 btn-warning"><i className="fas fa-export"></i></Link>     */}
+                                {/* <button onClick={exportToPDF} className="btn rounded-0 btn-warning btn-md mt-1"><i className="fas fa-export"></i></button>
+                                <span>&nbsp;</span> */}
                                 <button onClick={Acutaliser} className="btn rounded-0 btn-primary btn-md mt-1"><i className="fas fa-refresh"></i></button>
                                 <span>&nbsp;</span>
                                 <Link to="/admin/ajouter_un_electeur_membre" type="button" className="btn rounded-0 mt-1 btn-success"><i className="fas fa-user-plus"></i></Link>    
@@ -162,8 +188,9 @@ const ListeDesElecteursMembres = () =>{
                                     <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
+                                    <option value="cin">C.I.N</option>
                                 </select>
-                                <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherce</button>
+                                <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherche</button>
                             </div>
                         </form>
                     </div>
@@ -187,7 +214,7 @@ const ListeDesElecteursMembres = () =>{
                                 {
                                     records.map(item => {
                                         return (
-                                            <tr key={item.id}>
+                                            <tr key={item.id} style={{backgroundColor: item.status == 0 ? '' : 'Red'}}>
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
                                                 <td className="roboto-font">{item.numero_carte ?? '-'}</td>
                                                 <td className="roboto-font">{item.nom}</td>
@@ -241,4 +268,5 @@ const ListeDesElecteursMembres = () =>{
         </Fragment>
     );
 }
+
 export default ListeDesElecteursMembres;

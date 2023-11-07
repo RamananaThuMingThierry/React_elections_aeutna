@@ -33,7 +33,7 @@ const Register = () =>{
                 if(res.data.status  === 200){
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.password);
-                    swal("Success", res.data.message,"success");
+                    swal("Réussi", res.data.message,"success");
                     history.push("/admin/tableau_de_bord");
                 }else{
                     setRegister({...registerInput, error_list: res.data.Validation_errors});

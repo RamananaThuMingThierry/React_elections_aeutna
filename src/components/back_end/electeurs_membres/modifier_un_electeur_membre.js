@@ -28,7 +28,7 @@ const ModifierUnElecteurMembre = (props) =>{
             if(res.data.status === 200){
                 setElecteurs(res.data.electeur_membre);
             }else if(res.data.status === 404){
-                swal("Error", res.data.message, "error");
+                swal("Erreur", res.data.message, "error");
                 history.push('/admin/membres');
             }
             setLoading(false);
@@ -96,12 +96,12 @@ const ModifierUnElecteurMembre = (props) =>{
                 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';   
                 console.log(res.data);
                 if(res.data.status === 200){
-                    swal("Success", res.data.message, "success");
+                    swal("Réussi", res.data.message, "success");
                     history.push('/admin/liste_des_electeurs_membres');
                 }else if(res.data.status === 404){
-                    swal("Warning", res.data.message, "warning");
+                    swal("Avertissement", res.data.message, "warning");
                 }else if(res.data.status === 422){
-                    swal("Warning", res.data.message, "warning");
+                    swal("Avertissement", res.data.message, "warning");
                 }
             });
         }

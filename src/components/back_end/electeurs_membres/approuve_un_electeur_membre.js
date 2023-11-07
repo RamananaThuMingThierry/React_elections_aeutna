@@ -33,14 +33,14 @@ const ApprouveUnElecteurMembre = (props) =>{
         if(data.secteurs == ''){
             swal("Info", "Veuillez séléctionner son secteur !", "info");
         }else if(data.votes == ''){
-            swal("Warning", "Veuillez séléctionner son pièce jointe !", "warning");
+            swal("Avertissement", "Veuillez séléctionner son pièce jointe !", "warning");
         }else{
             axios.post(`api/valide_un_electeur_membre/${id_electeur_membre}`, data).then(res =>{
                 if(res.data.status  === 200){
-                    swal("Success", res.data.message,"success");
+                    swal("Réussi", res.data.message,"success");
                     history.push("/admin/liste_des_electeurs_votes");
                 }else if(res.data.status === 404){
-                    swal("Warning", res.data.message,"warning");
+                    swal("Avertissement", res.data.message,"warning");
                 }
             });
         }

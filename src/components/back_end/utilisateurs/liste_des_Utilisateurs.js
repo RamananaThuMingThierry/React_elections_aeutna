@@ -161,7 +161,7 @@ const Liste_des_Utilisateurs = () =>{
                                     <option value="" selected>Ouvre ce menu de séléction</option>
                                     <option value="pseudo">Pseudo</option>
                                 </select>
-                                <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherce</button>
+                                <button type="submit" className="btn btn-outline-primary rounded-0 roboto-font">Recherche</button>
                             </div>
                         </form>
                     </div>
