@@ -29,15 +29,19 @@ const AjouterElecteurNonAdhere = () =>{
         const formData = new FormData();
 
         if(electeursInput.nom == ''){
-            swal("Warning", "Veuillez saisir votre nom !", "warning");
+            swal("Avertissement", "Veuillez saisir votre nom !", "warning");
         }else if(electeursInput.sexe == ''){
-            swal("Warning", "Veuillez séléctionner votre sexe !", "warning");
+            swal("Avertissement", "Veuillez séléctionner votre sexe !", "warning");
         }else if(electeursInput.cin != '' && electeursInput.cin.length != 12){
-            swal("Warning", "Votre numéro de C.I.N invalide !", "warning");
+            swal("Avertissement", "Votre numéro de C.I.N invalide !", "warning");
         }else if(electeursInput.axes == ''){
-                swal("Warning", "Veuillez séléctionner votre axes !", "warning");
+                swal("Avertissement", "Veuillez séléctionner votre axes !", "warning");
         }else if(electeursInput.secteurs == ''){
-            swal("Warning", "Veuillez séléctionner votre secteurs !", "warning");
+            swal("Avertissement", "Veuillez séléctionner votre secteurs !", "warning");
+        }else if(electeursInput.votes == ''){
+            swal("Avertissement", "Veuillez séléctionner votre pièce justificative !", "warning");
+        }else if(electeursInput.cin == '' && electeursInput.votes == 'C.I.N'){
+            swal("Avertissement", "Votre pièce jusitifactive invalide !", "warning");
         }else{
             formData.append('nom', electeursInput.nom);
             formData.append('prenom', electeursInput.prenom);
@@ -45,6 +49,7 @@ const AjouterElecteurNonAdhere = () =>{
             formData.append('cin', electeursInput.cin);
             formData.append('secteurs', electeursInput.secteurs);
             formData.append('axes', electeursInput.axes);
+            formData.append('votes', electeursInput.votes);
             
             console.log(formData);
     
@@ -125,13 +130,24 @@ const AjouterElecteurNonAdhere = () =>{
                                             <option value="Ambolikandrina">Ambolikandrina</option>
                                             <option value="Ankatso 1">Ankatso 1</option>
                                             <option value="Ankatso 2">Ankatso 2 </option>
+                                            <option value="Centre Ville">Centre Ville</option>
                                             <option value="Itaosy">Itaosy</option>
                                             <option value="Ivato">Ivato</option>
                                             <option value="Votovorona">Votovorona</option>
                                         </select>
                                     </div>
                                 </div> 
-
+                                <div className="row">
+                                    <div className="col-md-12 mt-2">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="votes">Pièce justificative</label>
+                                        <select className="form-select roboto-font rounded-0 p-3" name="votes" id="votes" value={electeursInput.votes} onChange={handleInput}>
+                                            <option value="" selected>Ouvre ce menu de séléction</option>
+                                            <option value="C.I.N">C.I.N</option>
+                                            <option value="Copie">Copie</option>
+                                            <option value="Relève de notes">Relève de notes</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <hr className="mt-4"/>
                                 {/* Actions */}
                                 <div className="row">

@@ -147,11 +147,12 @@ const Liste_des_electeurs_votes = () =>{
                                         return (
                                             <tr key={item.id}>
                                                 <td><img src={item.photo == null ? `${process.env.PUBLIC_URL}/images/photo.jpg` : `${BASE_URL}/${item.photo}`} width="35px" height="35px" style={{borderRadius: '50%'}} alt="Image"/></td>
-                                                <td className="roboto-font">{item.numero_carte ?? '-'}</td>
+                                                <td className="roboto-font">{item.numero_carte ?? ''}</td>
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom}</td>
-                                                <td className="roboto-font">{item.votes == 'cin' ? 'C.I.N' : item.votes == 'Convocation' ? item.votes : 'Carte A.E.U.T.N.A'}</td>
+                                                <td className="roboto-font">{item.votes}</td>
                                                 <td className="roboto-font">{item.secteurs}</td>
+                                                <td className="roboto-font">{item.heure_vote}</td>
                                                 <td className="text-center">
                                                 {
                                                     item.numero_carte == null 

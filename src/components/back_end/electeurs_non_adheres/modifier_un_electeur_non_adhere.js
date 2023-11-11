@@ -49,18 +49,26 @@ const ModifierUnElecteurNonAdhere = (props) =>{
         electeur_non_adhere_input.cin = electeur_non_adhere_input.cin ?? '';
         electeur_non_adhere_input.secteurs = electeur_non_adhere_input.secteurs ?? '';
         electeur_non_adhere_input.axes = electeur_non_adhere_input.axes ?? '';
+        electeur_non_adhere_input.axes = electeur_non_adhere_input.votes ?? '';
+        electeur_non_adhere_input.heure_vote = electeur_non_adhere_input.heure_vote;
         electeur_non_adhere_input.date_inscription = electeur_non_adhere_input.date_inscription;
 
         if(electeur_non_adhere_input.nom == ''){
-            swal("Warning", "Veuillez saisir votre nom !", "warning");
+            swal("Avertissement", "Veuillez saisir votre nom !", "warning");
         }else if(electeur_non_adhere_input.sexe == ''){
-            swal("Warning", "Veuillez séléctionner votre sexe !", "warning");
+            swal("Avertissement", "Veuillez séléctionner votre sexe !", "warning");
         }else if(electeur_non_adhere_input.cin != '' && electeur_non_adhere_input.cin.length != 12){
-            swal("Warning", "Votre numéro de C.I.N invalide !", "warning");
+            swal("Avertissement", "Votre numéro de C.I.N invalide !", "warning");
         }else if(electeur_non_adhere_input.axes == ''){
-                swal("Warning", "Veuillez séléctionner votre axes !", "warning");
+                swal("Avertissement", "Veuillez séléctionner votre axes !", "warning");
+        }else if(electeur_non_adhere_input.secteurs == ''){
+            swal("Avertissement", "Veuillez votre secteurs !", "warning");
+        }else if(electeur_non_adhere_input.votes == ''){
+            swal("Avertissement", "Veuillez votre date d'inscription !", "warning");
+        }else if(electeur_non_adhere_input.cin == '' && electeur_non_adhere_input.votes == 'C.I.N'){
+            swal("Avertissement", "Votre pièce justificative invalide !", "warning");
         }else if(electeur_non_adhere_input.date_inscription == ''){
-            swal("Warning", "Veuillez votre date d'inscription !", "warning");
+            swal("Avertissement", "Veuillez votre date d'inscription !", "warning");
         }else{
             formData.append('nom', electeur_non_adhere_input.nom);
             formData.append('prenom', electeur_non_adhere_input.prenom);
@@ -68,17 +76,19 @@ const ModifierUnElecteurNonAdhere = (props) =>{
             formData.append('cin', electeur_non_adhere_input.cin);
             formData.append('secteurs', electeur_non_adhere_input.secteurs);
             formData.append('axes', electeur_non_adhere_input.axes);
+            formData.append('votes', electeur_non_adhere_input.votes);
+            formData.append('heure_vote', electeur_non_adhere_input.heure_vote);
             formData.append('date_inscription', electeur_non_adhere_input.date_inscription);
 
-            axios.post(`api/modifier_un_electeur_membre/${id_membre}`, formData).then(res =>{ 
+            axios.post(`api/modifier_un_electeur_non_adhere/${id_membre}`, formData).then(res =>{ 
                 console.log(res.data);
                 if(res.data.status === 200){
-                    swal("Success", res.data.message, "success");
+                    swal("Réussi", res.data.message, "success");
                     history.push('/admin/liste_des_electeurs_non_adheres');
                 }else if(res.data.status === 404){
-                    swal("Warning", res.data.message, "warning");
+                    swal("Avertissement", res.data.message, "warning");
                 }else if(res.data.status === 422){
-                    swal("Warning", res.data.message, "warning");
+                    swal("Avertissement", res.data.message, "warning");
                 }
             });
         }
@@ -147,10 +157,22 @@ const ModifierUnElecteurNonAdhere = (props) =>{
                                             <option value="Ambohipo">Ambohipo</option>
                                             <option value="Ambolikandrina">Ambolikandrina</option>
                                             <option value="Ankatso 1">Ankatso 1</option>
-                                            <option value="Ankatso 2">Ankatso 2 </option>
+                                            <option value="Ankatso 2">Ankatso 2</option>
+                                            <option value="Centre Ville">Centre Ville</option>
                                             <option value="Itaosy">Itaosy</option>
                                             <option value="Ivato">Ivato</option>
                                             <option value="Votovorona">Votovorona</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12 mt-2">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="votes">Pièce justificative</label>
+                                        <select className="form-select roboto-font rounded-0 p-3" name="votes" id="votes" value={electeur_non_adhere_input.votes} onChange={handleInput}>
+                                            <option value="" selected>Ouvre ce menu de séléction</option>
+                                            <option value="C.I.N">C.I.N</option>
+                                            <option value="Copie">Copie</option>
+                                            <option value="Relève de notes">Relève de notes</option>
                                         </select>
                                     </div>
                                 </div>

@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
 import Loading from "../constants/Loading";
-
+import FormatageDate from "../constants/formatageDate";
 const ListeDesElecteursMembres = () =>{
     const [loading, setLoading] = useState(true);
     
@@ -197,7 +197,7 @@ const ListeDesElecteursMembres = () =>{
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom ?? '-'}</td>
                                                 <td className="roboto-font">{item.cin ?? '-'}</td>
-                                                <td className="roboto-font text-right">{item.date_inscription ?? '-'}</td>
+                                                <td className="roboto-font text-center">{FormatageDate(item.date_inscription)}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                     {

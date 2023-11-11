@@ -176,8 +176,10 @@ const ListeDesElecteursNonAdheres = () =>{
                                 <tr>
                                     <th className="roboto-font">Noms</th>
                                     <th className="roboto-font">Prénoms</th>
+                                    <th className="roboto-font">C.I.N</th>
                                     <th className="roboto-font">Secteurs</th>
-                                    <th className="roboto-font">Votes</th>
+                                    <th className="roboto-font">Pièce</th>
+                                    <th className="roboto-font">Heure</th>
                                     <th className="text-center roboto-font">Actions</th>
                                 </tr>
                             </thead>
@@ -188,8 +190,10 @@ const ListeDesElecteursNonAdheres = () =>{
                                             <tr key={item.id}>
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom}</td>
+                                                <td className="roboto-font">{item.cin ?? '-'}</td>
                                                 <td className="roboto-font">{item.secteurs}</td>
                                                 <td className="roboto-font">{item.votes}</td>
+                                                <td className="roboto-font">{item.heure_vote}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
                                                         {
