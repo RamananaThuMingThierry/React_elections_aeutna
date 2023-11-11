@@ -117,6 +117,7 @@ const Liste_des_electeurs_votes = () =>{
                                     <option value="numero_carte">Numéro carte</option>
                                     <option value="nom">Nom</option>
                                     <option value="prenom">Prénom</option>
+                                    <option value="cin">C.I.N</option>
                                 </select>
                                 <button type="submit" className="btn btn-outline-primary roboto-font rounded-0">Recherche</button>
                             </div>
@@ -134,8 +135,9 @@ const Liste_des_electeurs_votes = () =>{
                                     <th className="roboto-font">Numéro carte</th>
                                     <th className="roboto-font">Noms</th>
                                     <th className="roboto-font">Prénoms</th>
-                                    <th className="roboto-font">Votes</th>
+                                    <th className="roboto-font">Pièce</th>
                                     <th className="roboto-font">Secteurs</th>
+                                    <th className="roboto-font">Heure</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>

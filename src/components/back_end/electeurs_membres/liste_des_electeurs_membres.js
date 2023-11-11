@@ -75,30 +75,6 @@ const ListeDesElecteursMembres = () =>{
             }
          });
     }
-
-    // const exportToPDF = () => {
-    //     axios.get(`api/export_liste_des_electeurs_membres`)
-    //         .then(response => {
-    //             const blob = new Blob([response.data], { type: 'application/pdf' });
-    //             const url = window.URL.createObjectURL(blob);
-    
-    //             // Crée un lien invisible pour le téléchargement
-    //             const a = document.createElement('a');
-    //             a.style.display = 'none';
-    //             a.href = url;
-    //             a.download = 'liste_noms_prenoms.pdf';
-    //             document.body.appendChild(a);
-    
-    //             // Cliquez sur le lien pour ouvrir la fenêtre de téléchargement
-    //             a.click();
-    
-    //             // Libère les ressources
-    //             window.URL.revokeObjectURL(url);
-    //         })
-    //         .catch(error => {
-    //             swal("Erreur", "Erreur d'exporation des données !", "error");
-    //         });
-    // };
     
     const RechercheElecteursMembresSubmit = (e) =>{
         e.preventDefault();
@@ -207,6 +183,7 @@ const ListeDesElecteursMembres = () =>{
                                     <th className="roboto-font">Noms</th>
                                     <th className="roboto-font">Prénoms</th>
                                     <th className="roboto-font">C.I.N</th>
+                                    <th className="roboto-font">Date d'inscription</th>
                                     <th className="roboto-font text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -220,9 +197,9 @@ const ListeDesElecteursMembres = () =>{
                                                 <td className="roboto-font">{item.nom}</td>
                                                 <td className="roboto-font">{item.prenom ?? '-'}</td>
                                                 <td className="roboto-font">{item.cin ?? '-'}</td>
+                                                <td className="roboto-font text-right">{item.date_inscription ?? '-'}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group btn-group-md">
-                                                   
                                                     {
                                                         user.roles == 0
                                                         ?

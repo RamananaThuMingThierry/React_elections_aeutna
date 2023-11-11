@@ -120,21 +120,22 @@ const ApprouveUnElecteurMembre = (props) =>{
                                             <select className="form-select rounded-0 p-3 roboto-font" name="secteurs" value={approuveInput.secteurs} onChange={handleInput}>
                                                 <option value="" selected>Secteurs</option>
                                                 <option value="67 h">67 h</option>
-                                                <option value="ambohipo">Ambohipo</option>
-                                                <option value="ambolikandrina">Ambolikandrina</option>
-                                                <option value="ankatso 1">Ankatso 1</option>
-                                                <option value="ankatso 2">Ankatso 2 </option>
-                                                <option value="itaosy">Itaosy</option>
-                                                <option value="ivato">Ivato</option>
-                                                <option value="votovorona">Votovorona</option>
+                                                <option value="Ambohipo">Ambohipo</option>
+                                                <option value="Ambolikandrina">Ambolikandrina</option>
+                                                <option value="Ankatso 1">Ankatso 1</option>
+                                                <option value="Ankatso 2">Ankatso 2 </option>
+                                                <option value="Centre Ville">Centre Ville</option>
+                                                <option value="Itaosy">Itaosy</option>
+                                                <option value="Ivato">Ivato</option>
+                                                <option value="Votovorona">Votovorona</option>
                                             </select>
                                         </div>
                                         <div className="col-md-6 mt-2">
                                             <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Vote</label>
                                             <select className="form-select rounded-0 p-3 roboto-font" name="votes" value={approuveInput.votes} onChange={handleInput}>
                                                 <option value="" selected>Ouvre ce menu de séléction</option>
-                                                <option value="numero_carte">Carte A.E.U.T.N.A</option>
-                                                <option value="cin">C.I.N</option>
+                                                <option value="Carte AEUTNA">Carte A.E.U.T.N.A</option>
+                                                <option value="C.I.N">C.I.N</option>
                                             </select>
                                         </div>
                                     </div> 
