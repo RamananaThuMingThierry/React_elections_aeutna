@@ -116,7 +116,7 @@ const ModifierUnElecteurMembre = (props) =>{
             <div className="row">
                 <div className="col-md-10 offset-md-1">
                     <div className="card elevation-1 border-0 rounded-0 mt-2">
-                        <h3 className="text-center text-muted my-3">Modifier un électeur membre</h3>
+                        <h3 className="text-center text-success my-3">MODIFIER UN ELECTEUR MEMBRE</h3>
                     </div>
                 </div>
             </div>
@@ -140,11 +140,11 @@ const ModifierUnElecteurMembre = (props) =>{
                                     <div className="col-md-8">
                                         <div className="row">
                                             <div className="col-md-6 mt-2">
-                                                <label for="numero_carte" style={{fontWeight: 'bold', fontSize: '17px'}}>Numéro Carte A.E.U.T.N.A</label>
+                                                <label for="numero_carte" className="text-muted roboto-font" style={{fontWeight: 'bold', fontSize: '17px'}}>Numéro Carte A.E.U.T.N.A</label>
                                                 <input className="form-control p-3 rounded-0" type="number" min={1} max={1500} id="numero_carte" autoComplete="false" name="numero_carte" onChange={handleInput} value={electeur_membre_input.numero_carte ?? ''} placeholder="Saisir votre numéro de carte AEUTNA"/>
                                             </div>
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} for="sexe">Sexe</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="sexe">Sexe</label>
                                                 <select className="form-select rounded-0 p-3" name="sexe" id="sexe" value={electeur_membre_input.sexe} onChange={handleInput}>
                                                     <option value="" selected>Ouvre ce menu de séléction</option>
                                                     <option value="masculin">Masculin</option>
@@ -154,17 +154,17 @@ const ModifierUnElecteurMembre = (props) =>{
                                         </div>
                                         <div className="row">
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} for="nom">Nom</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="nom">Nom</label>
                                                 <input className="form-control p-3 rounded-0" type="text" autoComplete="false" id="nom" name="nom" value={electeur_membre_input.nom ?? ''} placeholder="Saisir votre nom" onChange={handleInput}/>
                                             </div>
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} for="prenom">Prénom</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="prenom">Prénom</label>
                                                 <input className="form-control p-3 rounded-0" type="text" value={electeur_membre_input.prenom ?? ''} id="prenom" name="prenom" autoComplete="false" placeholder="Saisir votre prénom" onChange={handleInput}/>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-12">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} for="cin">C.I.N</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="cin">C.I.N</label>
                                                 <input maxLength={12} minLength={12} className="form-control p-3 rounded-0" id="cin" type="number" onChange={handleInput} value={electeur_membre_input.cin ?? ''} autoComplete="false" placeholder="Saisir votre Numéro de C.I.N" name="cin"/>
                                             </div>
                                         </div>
@@ -173,7 +173,7 @@ const ModifierUnElecteurMembre = (props) =>{
                                 {/* Axes, sympathisant, date d'inscription */}
                                 <div className="row">
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} for="axes">Axes</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="axes">Axes</label>
                                         <select className="form-select rounded-0 p-3" name="axes" id="axes" value={electeur_membre_input.axes} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="Andempona">Andempona</option>
@@ -185,7 +185,7 @@ const ModifierUnElecteurMembre = (props) =>{
                                         </select>
                                     </div>
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} for="sympathisant">sympathisant(e)</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="sympathisant">sympathisant(e)</label>
                                         <select className="form-select rounded-0 p-3" name="sympathisant" id="sympathisant" value={electeur_membre_input.sympathisant} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="Non">Non</option>
@@ -193,7 +193,7 @@ const ModifierUnElecteurMembre = (props) =>{
                                         </select>
                                     </div>
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} for="date_inscription">Date d'inscription</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font" for="date_inscription">Date d'inscription</label>
                                         <input className="form-control p-3 rounded-0" value={electeur_membre_input.date_inscription ?? ''} id="date_inscription" name="date_inscription" type="date" onChange={handleInput} autoComplete="false"/>
                                     </div>
                                 </div> 

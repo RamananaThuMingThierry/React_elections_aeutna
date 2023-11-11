@@ -139,9 +139,7 @@ const ListeDesElecteursNonAdheres = () =>{
                 <div className="col-md-12">
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between align-items-center">
-                        <h2 className="roboto-font text-muted text-center">
-                            Liste des électeurs non adhérés
-                        </h2>
+                        <h2 className="roboto-font text-muted text-center">LISTE DES ELECTEURS NON ADHERE</h2>
                         <div className="d-flex justify-content-between align-items-center">
                             <button onClick={Actualiser} className="btn btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button>
                             <span>&nbsp;</span>

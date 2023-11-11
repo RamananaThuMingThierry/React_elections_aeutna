@@ -97,7 +97,7 @@ const Liste_des_electeurs_votes = () =>{
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex align-items-center justify-content-between">
                             <h2 className="text-muted roboto-font mt-2 text-center">
-                                Liste des électeurs
+                                LISTE DES ELECTEURS
                             </h2>
                             <div className="d-flex justify-content align-items-center">
                                 <button onClick={Actualiser} className="btn mt-1 btn-primary rounded-0 btn-md"><i className="fas fa-refresh"></i></button> 

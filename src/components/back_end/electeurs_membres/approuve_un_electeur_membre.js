@@ -69,7 +69,7 @@ const ApprouveUnElecteurMembre = (props) =>{
             <div className="row">
                 <div className="col-md-10 offset-md-1">
                     <div className="card elevation-1 border-0 rounded-0 mt-2">
-                        <h2 className="text-center text-muted my-3 roboto-font">Informations</h2>
+                        <h2 className="text-center text-success my-3 roboto-font">I N F O R M A T I O N S</h2>
                     </div>
                 </div>
             </div>
@@ -86,27 +86,27 @@ const ApprouveUnElecteurMembre = (props) =>{
                                     <div className="col-md-8 mt-2">
                                         <div className="row">
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Numéro Carte</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Numéro Carte</label>
                                                 <input className="form-control p-3 rounded-0 roboto-font" disabled value={afficher_un_electeur_membre_approuve.numero_carte ?? '-'} style={{backgroundColor:'white'}}/>
                                             </div>
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Sexe</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Sexe</label>
                                                 <input className="form-control p-3 rounded-0 roboto-font" disabled value={afficher_un_electeur_membre_approuve.sexe ?? 'Masculin'} style={{backgroundColor:'white'}}/>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Nom</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Nom</label>
                                                 <input className="form-control p-3 rounded-0 roboto-font" value={afficher_un_electeur_membre_approuve.nom ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                             </div>
                                             <div className="col-md-6 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Prénom</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Prénom</label>
                                                 <input className="form-control p-3 rounded-0 roboto-font" value={afficher_un_electeur_membre_approuve.prenom} disabled style={{backgroundColor:'white'}}/>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-12 mt-2">
-                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">C.I.N</label>
+                                                <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">C.I.N</label>
                                                 <input className="form-control p-3 rounded-0 roboto-font" value={afficher_un_electeur_membre_approuve.cin ?? '-'} disabled style={{backgroundColor:'white'}}/>
                                             </div>    
                                         <div/>
@@ -116,7 +116,7 @@ const ApprouveUnElecteurMembre = (props) =>{
                                     {/* Secteurs et vote */}
                                     <div className="row">
                                         <div className="col-md-6 mt-2">
-                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Secteurs</label>
+                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Secteurs</label>
                                             <select className="form-select rounded-0 p-3 roboto-font" name="secteurs" value={approuveInput.secteurs} onChange={handleInput}>
                                                 <option value="" selected>Secteurs</option>
                                                 <option value="67 h">67 h</option>
@@ -131,7 +131,7 @@ const ApprouveUnElecteurMembre = (props) =>{
                                             </select>
                                         </div>
                                         <div className="col-md-6 mt-2">
-                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Vote</label>
+                                            <label style={{fontWeight: 'bold', fontSize: '17px'}} className="text-muted roboto-font">Vote</label>
                                             <select className="form-select rounded-0 p-3 roboto-font" name="votes" value={approuveInput.votes} onChange={handleInput}>
                                                 <option value="" selected>Ouvre ce menu de séléction</option>
                                                 <option value="Carte AEUTNA">Carte A.E.U.T.N.A</option>

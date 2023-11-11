@@ -70,16 +70,16 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
     <Fragment>
       <div className="row">
           <div className="col-md-12">
-            <div className="card elevation-1 border-0 rounded-0 mt-2">
-                <h3 className="text-center text-success roboto-font my-3">S T A T I S T I Q U E S</h3>
+            <div className="card elevation-1 border-0 bg-info rounded-0 mt-2">
+                <h3 className="text-center text-white roboto-font my-3">S T A T I S T I Q U E S</h3>
             </div>
         </div>
       </div>
 
       <div className="row">
           <div className="col-md-12">
-            <div className="card elevation-1 border-0 rounded-0 mt-2">
-                <h3 className="text-center text-muted roboto-font my-3">Nombre Total</h3>
+            <div className="card elevation-1 border-0 rounded-0">
+                <h3 className="text-center text-muted roboto-font my-3">NOMBRE TOTAL</h3>
             </div>
         </div>
       </div>

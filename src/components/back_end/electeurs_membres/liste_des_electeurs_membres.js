@@ -139,7 +139,7 @@ const ListeDesElecteursMembres = () =>{
                     <div className="card mt-2 p-2 rounded-0">
                         <div className="d-flex justify-content-between align-items-center">
                             <h3 className="roboto-font text-muted text-center mt-2">
-                                Liste des élécteurs membres A.E.U.T.N.A
+                                LISTE DES ELECTEURS MEMBRES A.E.U.T.N.A
                             </h3>
                             <div className="d-flex justify-content-between align-items-center">
                                 {/* <Link to="/admin/export_liste_des_electeurs" type="button" className="btn rounded-0 mt-1 btn-warning"><i className="fas fa-export"></i></Link>     */}
