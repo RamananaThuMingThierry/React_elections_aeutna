@@ -24,6 +24,7 @@ const [nombre_cin, setCIN] = useState(0);
 const [nombre_copie, setCopie] = useState(0);
 const [nombre_releve_de_notes, setReleveDeNotes] = useState(0);
 
+const [nombre_nouveau_adhere, setNouveauAdhere] = useState(0);
 useEffect(() =>{
 
   axios.get(`api/statistiques`).then(res =>{
@@ -45,6 +46,8 @@ useEffect(() =>{
         setCIN(res.data.nombre_cin);
         setCopie(res.data.nombre_copie);
         setReleveDeNotes(res.data.nombre_releve_de_notes);
+
+        setNouveauAdhere(res.data.nombre_nouveau_adhere);
        }
        setLoading(false);
    });
@@ -234,6 +237,21 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
                   <h3 className="text-center roboto-font mt-4 text-primary my-3">Relève de notes</h3>
                   <hr/>
                   <h1 className="text-center roboto-font my-3 text-primary">{nombre_releve_de_notes}</h1>
+              </div>
+          </div>
+        </div>
+       
+        <div className="row">
+          <div className="col-md-12">
+            <div className="card elevation-1 border-0 bg-primary rounded-0 mt-2">
+                <h3 className="text-center text-white roboto-font my-3">NOUVEAU ADHERE</h3>
+            </div>
+        </div>
+      </div>
+      <div className="row mb-2">
+          <div className="col-md-12">
+              <div className="card elevation-1 border-0 rounded-0 bg-light">
+                  <h1 className="text-center roboto-font my-3 text-primary">{nombre_nouveau_adhere}</h1>
               </div>
           </div>
         </div>

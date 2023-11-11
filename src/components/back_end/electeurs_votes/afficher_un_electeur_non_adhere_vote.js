@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
 import Loading from "../constants/Loading";
+import FormatageDate from "../constants/formatageDate";
 const AfficherUnElecteurNonAdhereVote = (props) =>{
 
     const history = useHistory();
@@ -77,7 +78,7 @@ const AfficherUnElecteurNonAdhereVote = (props) =>{
                                 </div>
                                 <div className="col-md-6 mt-2">
                                     <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Date d'inscription</label>
-                                    <input className="form-control roboto-font p-3 rounded-0" value={afficher_un_electeur_non_adhere_vote.date_inscription ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                    <input className="form-control roboto-font p-3 rounded-0" value={FormatageDate(afficher_un_electeur_non_adhere_vote.date_inscription)} disabled style={{backgroundColor:'white'}}/>
                                 </div>
                             </div> 
                             <hr className="mt-4"/>

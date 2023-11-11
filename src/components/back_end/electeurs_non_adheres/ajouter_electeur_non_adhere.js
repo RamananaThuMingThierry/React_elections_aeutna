@@ -16,6 +16,8 @@ const AjouterElecteurNonAdhere = () =>{
         cin:'',
         axes:'',
         secteurs:'',
+        votes:'',
+        adhesion:'',
     });
 
     const handleInput = (e) =>{
@@ -40,6 +42,10 @@ const AjouterElecteurNonAdhere = () =>{
             swal("Avertissement", "Veuillez séléctionner votre secteurs !", "warning");
         }else if(electeursInput.votes == ''){
             swal("Avertissement", "Veuillez séléctionner votre pièce justificative !", "warning");
+        }else if(electeursInput.adhesion == ''){
+            swal("Avertissement", "Vérifier si vous êtes membres ou pas!", "warning");
+        }else if(electeursInput.adhesion == '1' && electeursInput.votes == 'Relève de notes'){
+            swal("Avertissement", "Vous n'êtes pas autoriser à faire une adhésion !", "warning");
         }else if(electeursInput.cin == '' && electeursInput.votes == 'C.I.N'){
             swal("Avertissement", "Votre pièce jusitifactive invalide !", "warning");
         }else{
@@ -50,6 +56,7 @@ const AjouterElecteurNonAdhere = () =>{
             formData.append('secteurs', electeursInput.secteurs);
             formData.append('axes', electeursInput.axes);
             formData.append('votes', electeursInput.votes);
+            formData.append('adhesion', electeursInput.adhesion);
             
             console.log(formData);
     
@@ -75,7 +82,7 @@ const AjouterElecteurNonAdhere = () =>{
             <div className="row">
                 <div className="col-md-10 offset-md-1">
                     <div className="card elevation-1 border-0 rounded-0 mt-2">
-                        <h3 className="text-center text-muted roboto-font my-3">Ajouter un électeur non adhéré</h3>
+                        <h3 className="text-center text-success roboto-font my-3">AJOUTER UN ELECTEUR NON ADHERE</h3>
                     </div>
                 </div>
             </div>
@@ -87,15 +94,15 @@ const AjouterElecteurNonAdhere = () =>{
                                 {/* Nom, Prénom, Sexe */}
                                 <div className="row">
                                     <div className="col-md-4">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="nom">Nom</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="nom">Nom</label>
                                         <input className="form-control p-3 roboto-font rounded-0" type="text" autoComplete="false" id="nom" name="nom" value={electeursInput.nom ?? ''} placeholder="Saisir votre nom" onChange={handleInput}/>
                                     </div>
                                     <div className="col-md-4">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="prenom">Prénom</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="prenom">Prénom</label>
                                         <input className="form-control p-3 roboto-font rounded-0" type="text" value={electeursInput.prenom ?? ''} id="prenom" name="prenom" autoComplete="false" placeholder="Saisir votre prénom" onChange={handleInput}/>
                                     </div>
                                     <div className="col-md-4">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="sexe">Sexe</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="sexe">Sexe</label>
                                         <select className="form-select rounded-0 roboto-font p-3" name="sexe" id="sexe" value={electeursInput.sexe} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="masculin">Masculin</option>
@@ -106,11 +113,11 @@ const AjouterElecteurNonAdhere = () =>{
                                 {/* C.I.N et lieu de délivrance et axes */}
                                 <div className="row">
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="cin">C.I.N</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="cin">C.I.N</label>
                                         <input maxLength={12} minLength={12} className="form-control roboto-font p-3 rounded-0" id="cin" type="number" onChange={handleInput} value={electeursInput.cin ?? ''} autoComplete="false" placeholder="Saisir votre Numéro de C.I.N" name="cin"/>
                                     </div>
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="axes">Axes</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="axes">Axes</label>
                                         <select className="form-select roboto-font rounded-0 p-3" name="axes" id="axes" value={electeursInput.axes} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="Andempona">Andempona</option>
@@ -122,7 +129,7 @@ const AjouterElecteurNonAdhere = () =>{
                                         </select>
                                     </div>
                                     <div className="col-md-4 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="secteurs">Secteurs</label>
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="secteurs">Secteurs</label>
                                         <select className="form-select roboto-font rounded-0 p-3" name="secteurs" id="secteurs" value={electeursInput.secteurs} onChange={handleInput}>
                                             <option value="" selected>Secteurs</option>
                                             <option value="67 h">67 h</option>
@@ -138,13 +145,21 @@ const AjouterElecteurNonAdhere = () =>{
                                     </div>
                                 </div> 
                                 <div className="row">
-                                    <div className="col-md-12 mt-2">
-                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="votes">Pièce justificative</label>
+                                    <div className="col-md-6 mt-2">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="votes">Pièce justificative</label>
                                         <select className="form-select roboto-font rounded-0 p-3" name="votes" id="votes" value={electeursInput.votes} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="C.I.N">C.I.N</option>
                                             <option value="Copie">Copie</option>
                                             <option value="Relève de notes">Relève de notes</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-md-6 mt-2">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="adhesion">Adhésion</label>
+                                        <select className="form-select roboto-font rounded-0 p-3" name="adhesion" id="adhesion" value={electeursInput.adhesion} onChange={handleInput}>
+                                            <option value="" selected>Ouvre ce menu de séléction</option>
+                                            <option value="1">Oui</option>
+                                            <option value="0">Non</option>
                                         </select>
                                     </div>
                                 </div>

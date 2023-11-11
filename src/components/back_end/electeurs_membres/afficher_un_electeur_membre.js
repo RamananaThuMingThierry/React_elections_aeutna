@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import BASE_URL from "../../../BasesUrl";
+import FormatageDate from "../constants/formatageDate";
 import Loading from "../constants/Loading";
 const AfficherUnElecteurMembre = (props) =>{
 
@@ -91,7 +92,7 @@ const AfficherUnElecteurMembre = (props) =>{
                                     </div>
                                     <div className="col-md-4 mt-2">
                                         <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font">Date d'inscription</label>
-                                        <input className="form-control p-3 rounded-0 roboto-font" value={afficherUnElecteurMembre.date_inscription ?? '-'} disabled style={{backgroundColor:'white'}}/>
+                                        <input className="form-control p-3 rounded-0 roboto-font" value={FormatageDate(afficherUnElecteurMembre.date_inscription)} disabled style={{backgroundColor:'white'}}/>
                                     </div>
                                 </div> 
                                 <hr className="mt-4"/>

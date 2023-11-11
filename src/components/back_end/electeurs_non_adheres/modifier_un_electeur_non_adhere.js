@@ -49,7 +49,8 @@ const ModifierUnElecteurNonAdhere = (props) =>{
         electeur_non_adhere_input.cin = electeur_non_adhere_input.cin ?? '';
         electeur_non_adhere_input.secteurs = electeur_non_adhere_input.secteurs ?? '';
         electeur_non_adhere_input.axes = electeur_non_adhere_input.axes ?? '';
-        electeur_non_adhere_input.axes = electeur_non_adhere_input.votes ?? '';
+        electeur_non_adhere_input.votes = electeur_non_adhere_input.votes ?? '';
+        electeur_non_adhere_input.adhesion = electeur_non_adhere_input.adhesion ?? '';
         electeur_non_adhere_input.heure_vote = electeur_non_adhere_input.heure_vote;
         electeur_non_adhere_input.date_inscription = electeur_non_adhere_input.date_inscription;
 
@@ -65,6 +66,10 @@ const ModifierUnElecteurNonAdhere = (props) =>{
             swal("Avertissement", "Veuillez votre secteurs !", "warning");
         }else if(electeur_non_adhere_input.votes == ''){
             swal("Avertissement", "Veuillez votre date d'inscription !", "warning");
+        }else if(electeur_non_adhere_input.adhesion == ''){
+            swal("Avertissement", "Vérifier si vous êtes membres ou pas !", "warning");
+        }else if(electeur_non_adhere_input.adhesion == '1' && electeur_non_adhere_input.votes == 'Relève de notes'){
+            swal("Avertissement", "Vous n'êtes pas autoriser à faire une adhésion !", "warning");
         }else if(electeur_non_adhere_input.cin == '' && electeur_non_adhere_input.votes == 'C.I.N'){
             swal("Avertissement", "Votre pièce justificative invalide !", "warning");
         }else if(electeur_non_adhere_input.date_inscription == ''){
@@ -77,6 +82,7 @@ const ModifierUnElecteurNonAdhere = (props) =>{
             formData.append('secteurs', electeur_non_adhere_input.secteurs);
             formData.append('axes', electeur_non_adhere_input.axes);
             formData.append('votes', electeur_non_adhere_input.votes);
+            formData.append('adhesion', electeur_non_adhere_input.adhesion);
             formData.append('heure_vote', electeur_non_adhere_input.heure_vote);
             formData.append('date_inscription', electeur_non_adhere_input.date_inscription);
 
@@ -166,13 +172,21 @@ const ModifierUnElecteurNonAdhere = (props) =>{
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-md-12 mt-2">
+                                    <div className="col-md-6 mt-2">
                                         <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font" for="votes">Pièce justificative</label>
                                         <select className="form-select roboto-font rounded-0 p-3" name="votes" id="votes" value={electeur_non_adhere_input.votes} onChange={handleInput}>
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="C.I.N">C.I.N</option>
                                             <option value="Copie">Copie</option>
                                             <option value="Relève de notes">Relève de notes</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-md-6 mt-2">
+                                        <label style={{fontWeight: 'bold', fontSize: '17px'}} className="roboto-font text-muted" for="adhesion">Adhésion</label>
+                                        <select className="form-select roboto-font rounded-0 p-3" name="adhesion" id="adhesion" value={electeur_non_adhere_input.adhesion} onChange={handleInput}>
+                                            <option value="" selected>Ouvre ce menu de séléction</option>
+                                            <option value="1">Oui</option>
+                                            <option value="0">Non</option>
                                         </select>
                                     </div>
                                 </div>
