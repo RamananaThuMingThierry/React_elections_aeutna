@@ -68,9 +68,11 @@ const ModifierUnElecteurNonAdhere = (props) =>{
             swal("Avertissement", "Veuillez votre date d'inscription !", "warning");
         }else if(electeur_non_adhere_input.adhesion == ''){
             swal("Avertissement", "Vérifier si vous êtes membres ou pas !", "warning");
-        }else if(electeur_non_adhere_input.adhesion == '1' && electeur_non_adhere_input.votes == 'Relève de notes'){
+        }else if(electeur_non_adhere_input.adhesion == '1' && electeur_non_adhere_input.votes == 'Relevé de notes'){
             swal("Avertissement", "Vous n'êtes pas autoriser à faire une adhésion !", "warning");
         }else if(electeur_non_adhere_input.cin == '' && electeur_non_adhere_input.votes == 'C.I.N'){
+            swal("Avertissement", "Votre pièce justificative invalide !", "warning");
+        }else if(electeur_non_adhere_input.cin != '' && electeur_non_adhere_input.votes == 'Copie'){
             swal("Avertissement", "Votre pièce justificative invalide !", "warning");
         }else if(electeur_non_adhere_input.date_inscription == ''){
             swal("Avertissement", "Veuillez votre date d'inscription !", "warning");
@@ -178,7 +180,7 @@ const ModifierUnElecteurNonAdhere = (props) =>{
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="C.I.N">C.I.N</option>
                                             <option value="Copie">Copie</option>
-                                            <option value="Relève de notes">Relève de notes</option>
+                                            <option value="Relevé de notes">Relève de notes</option>
                                         </select>
                                     </div>
                                     <div className="col-md-6 mt-2">

@@ -44,10 +44,12 @@ const AjouterElecteurNonAdhere = () =>{
             swal("Avertissement", "Veuillez séléctionner votre pièce justificative !", "warning");
         }else if(electeursInput.adhesion == ''){
             swal("Avertissement", "Vérifier si vous êtes membres ou pas!", "warning");
-        }else if(electeursInput.adhesion == '1' && electeursInput.votes == 'Relève de notes'){
+        }else if(electeursInput.adhesion == '1' && electeursInput.votes == 'Relevé de notes'){
             swal("Avertissement", "Vous n'êtes pas autoriser à faire une adhésion !", "warning");
         }else if(electeursInput.cin == '' && electeursInput.votes == 'C.I.N'){
-            swal("Avertissement", "Votre pièce jusitifactive invalide !", "warning");
+            swal("Avertissement", "Votre pièce justifactive invalide !", "warning");
+        }else if(electeursInput.cin != '' && electeursInput.votes == 'Copie'){
+            swal("Avertissement", "Votre pièce justifactive invalide !", "warning");
         }else{
             formData.append('nom', electeursInput.nom);
             formData.append('prenom', electeursInput.prenom);
@@ -151,7 +153,7 @@ const AjouterElecteurNonAdhere = () =>{
                                             <option value="" selected>Ouvre ce menu de séléction</option>
                                             <option value="C.I.N">C.I.N</option>
                                             <option value="Copie">Copie</option>
-                                            <option value="Relève de notes">Relève de notes</option>
+                                            <option value="Relevé de notes">Relève de notes</option>
                                         </select>
                                     </div>
                                     <div className="col-md-6 mt-2">

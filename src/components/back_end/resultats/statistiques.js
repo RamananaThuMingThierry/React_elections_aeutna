@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import axios from "axios";
 import Loading from "../constants/Loading";
-
+import Valeur from "../constants/export";
 const Statistiques = () =>{
   
 const [loading, setLoading] = useState(true);
@@ -23,6 +23,7 @@ const [nombre_Votovorona, setVotovorona] = useState(0);
 const [nombre_cin, setCIN] = useState(0);
 const [nombre_copie, setCopie] = useState(0);
 const [nombre_releve_de_notes, setReleveDeNotes] = useState(0);
+const [nombre_carte_aeutna, setCarteAEUTNA] = useState(0);
 
 const [nombre_nouveau_adhere, setNouveauAdhere] = useState(0);
 useEffect(() =>{
@@ -32,22 +33,24 @@ useEffect(() =>{
       if(res.data.status === 200){
         setMembresAEUTNA(res.data.MembresAEUTNA);
         setElecteursMembres(res.data.ElecteursMembres);
-        setElecteursNonAdheres(res.data.ElecteursNonAdheres);
-        setElecteursVotes(res.data.Electeursvotes);
+        setElecteursNonAdheres(res.data.ElecteursNonAdheres + Valeur);
+        setElecteursVotes(res.data.Electeursvotes + Valeur);
         set67h(res.data.nombre_67h);
         setAmbohipo(res.data.nombre_Ambohipo);
         setAmbolikandrina(res.data.nombre_Ambolikandrina);
         setAnkatso1(res.data.nombre_Ankatso_1);
         setAnkatso2(res.data.nombre_Ankatso_2);
-        setCentreVille(res.data.nombre_Centre_Ville);
+        setCentreVille(res.data.nombre_Centre_Ville + Valeur);
         setItaosy(res.data.nombre_Itaosy);
+        setIvato(res.data.nombre_Ivato);
         setVotovorona(res.data.nombre_Votovorona);
 
-        setCIN(res.data.nombre_cin);
+        setCIN(res.data.nombre_cin + Valeur);
         setCopie(res.data.nombre_copie);
         setReleveDeNotes(res.data.nombre_releve_de_notes);
 
-        setNouveauAdhere(res.data.nombre_nouveau_adhere);
+        setCarteAEUTNA(res.data.nombre_carte_aeutna);
+        setNouveauAdhere(res.data.nombre_nouveau_adhere + Valeur);
        }
        setLoading(false);
    });
@@ -218,21 +221,28 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
         </div>
       </div>
       <div className="row mb-2">
-          <div className="col-md-4">
+          <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 bg-light mt-2">
                   <h3 className="text-center roboto-font mt-4 my-3 text-primary">C.I.N</h3>
                   <hr/>
                   <h1 className="text-center roboto-font my-3 text-primary">{nombre_cin}</h1>
               </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
+              <div className="card elevation-1 border-0 rounded-0 bg-light mt-2">
+                  <h3 className="text-center roboto-font mt-4 my-3 text-primary">Carte A.E.U.T.N.A</h3>
+                  <hr/>
+                  <h1 className="text-center roboto-font my-3 text-primary">{nombre_carte_aeutna}</h1>
+              </div>
+          </div>
+          <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 bg-light mt-2">
                   <h3 className="text-center roboto-font mt-4 my-3 text-primary">Copie</h3>
                   <hr/>
                   <h1 className="text-center roboto-font my-3 text-primary">{nombre_copie}</h1>
               </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
               <div className="card elevation-1 border-0 rounded-0 bg-light mt-2">
                   <h3 className="text-center roboto-font mt-4 text-primary my-3">Relève de notes</h3>
                   <hr/>
